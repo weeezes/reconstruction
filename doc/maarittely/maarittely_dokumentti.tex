@@ -1,0 +1,65 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8x]{inputenc}
+\usepackage{ucs}
+\usepackage[finnish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[figurename=Kuva, tablename=Taulukko]{caption}
+
+\author{Vesa Hagström}
+
+\begin{document}
+    \renewcommand{\bibname}{Viitteet}
+
+	\begin{titlepage}
+    \label{Title}
+	\begin{flushleft}
+		\hfill Vesa Hagström 											\\
+		\hfill \texttt{vesa.hagstrom@helsinki.fi} 						\\
+		\hfill Op.Nro: 013865575											\\
+		\hfill Tiralabra harjoitustyö									\\
+		\hfill 9.5.2013													\\
+	\end{flushleft}
+
+	\vfill
+
+	\begin{center}
+		\huge{Määrittelydokumentti}
+	\end{center}
+
+	\vfill
+
+	\end{titlepage}
+
+    \section*{Aihe}
+    \label{Aihe}
+    Työn aihe on Radon-muunnoksen käänteismuunnokseen perustuva rekonstruktioalgoritmi. Algoritmi soveltuu esimerkiksi tietokonetomografian poikkileikkauskuvien laskemiseen  kohteen ympäri otetuista röntgenkuvista. Esimerkiksi lääketieteellisessä diagnostiikassa pelkät läpivalaisukuvat eivät aina tarjoa tarpeeksi informaatiota diagnoosin tekemiselle tai hoidon suunnittelulle, sillä esimerkiksi kasvaimen tarkka sijainti, muoto ja koko eivät näy selvästi ilman rekonstruoituja kuvia kohteen poikkileikkauksesta.
+    
+    \section*{Algoritmit ja tietorakenteet}
+    Työssä toteutetaan \textbf{Filtered Backprojection} -algoritmi Radon-käänteismuunnoksen laskemiseen, mikä soveltaa Fourier-muunnosta ja sen käänteismuunnosta. Fourier-muunnos ja -käänteismuunnos toteutetaan \textbf{Cooley–Tukey Fast Fourier Transform}  -algoritmilla.
+    
+    Fast Fourier Transform (FFT) -algoritmeiksi määritellään algoritmit, mitkä laskevat diskreetin Fourier-muunnoksen ajassa $\mathcal O(n \log n)$, eli huomattavasti nopeammin kuin suoraan laskettaessa kuluva $\mathcal O(n^2)$. 2-ulotteiselle kuvatiedostolle Fourier-muunnoksen laskemiseksi tarvitaan $n+m$ FFT-operaatiota, missä $n$ ja $m$ ovat kuvan dimensiot. Jos merkitään $d = 2 * \max \lbrace n, m \rbrace$, ja otetaan huomioon, että myös Fourier-käänteismuunnos täytyy laskea yhtä monta kertaa kuin Fourier-muunnos, niin aikavaativuudeksi saadaan luokkaa $\mathcal O(2d^2\log (d/2)) = O(2d^2 (\log d - \log 2) ) = O(d^2 \log d)$. Tämän lisäksi itse tulosta muodostaessa jokainen kuvan piste joudutaan käymään läpi, jolloin aikavaativuuteen tulee vielä $\mathcal O(d^2)$ suuruinen lisä, eli vaativuudeksi saadaan $\mathcal O(d^2 \log d + d^2) = O(d^2 (\log d + 1))$. Lisäksi tämä lasketaan $k$:lle kuvalle, jolloin $\mathcal O(k*d^2 (\log d + 1))$
+    
+    Röntgenkuvista muodostetaan Radon-käänteismuunnoksen laskemista varten sinogrammit, mikä vaatii kaikkien kuvian kaikkien pikseleiden läpikäymisen. Tämä on aika- ja tilavaativuudeltaan $\mathcal O(i*j*k)$.
+    
+    \section*{Syötteet ja niiden käsittely}
+    Ohjelma tulee saamaan syötteenä röntgenkuvat ja kulmat, missä ne on otettu. Röntgenkuvista muodostetaan sinogrammit, joiden perusteella Radon-käänteismuunnos lasketaan. Ohjelma tallentaa tuloksena saatavat poikkileikkauskuvat levylle.
+    
+    \newpage
+
+    \begin{thebibliography}{6}
+        \bibitem{radonmuunnos}
+	    Peter Toft, 
+	    \emph{"The Radon Transform - Theory and Implementation"},\\
+        	\url{http://petertoft.dk/PhD/}
+        	
+        	\bibitem{fft}
+	    J.W. Cooley, J.W. Tukey 
+	    \emph{"An algorithm for the machine calculation of complex Fourier series"},\\
+        	\url{http://dx.doi.org/10.1090/S0025-5718-1965-0178586-1}
+    \end{thebibliography}
+\end{document}
