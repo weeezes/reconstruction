@@ -1,0 +1,42 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8x]{inputenc}
+\usepackage{ucs}
+\usepackage[finnish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[figurename=Kuva, tablename=Taulukko]{caption}
+
+\author{Vesa Hagström}
+
+\begin{document}
+    \renewcommand{\bibname}{Viitteet}
+
+	\begin{titlepage}
+    \label{Title}
+	\begin{flushleft}
+		\hfill Vesa Hagström 											\\
+		\hfill \texttt{vesa.hagstrom@helsinki.fi} 						\\
+		\hfill Op.Nro: 013865575											\\
+		\hfill Tiralabra harjoitustyö									\\
+		\hfill 16.5.2013													\\
+	\end{flushleft}
+
+	\vfill
+
+	\begin{center}
+		\huge{1. Viikkoraportti}
+	\end{center}
+
+	\vfill
+
+	\end{titlepage}
+
+    \section*{Selvity}
+    1. Viikolla sain projektin rungon aloitettua. Loin pienen luokan lukemaan kuvadatan talteen, ja testin luokalle. Projekti ei sisällä tällä hetkellä juuri mitään muuta. Suurin saavutus oli saada toimivat CMakeListit aikaiseksi, mikä oli ehkä myös viikon opettavaisin asia.
+    
+    \section*{Mitä seuraavaksi?}
+\end{document}
