@@ -19,7 +19,7 @@ Image::Image(const char* filename, int width, int height)
             imageStream.read(data, size);
             imageStream.close();
             
-            this->imageData = new std::complex<double>[size];
+            this->imageData = initNewComplexArray(size);
             for (int i=0; i<size; i++)
                 this->imageData[i] = std::polar(data[i]*1.0, 0.0);
 
@@ -38,7 +38,7 @@ Image::Image(const char* filename, int width, int height)
         this->height = -1;
         this->size = -1;
         
-        this->imageData = new std::complex<double>[1];
+        this->imageData = initNewComplexArray(1);
     }
 
 

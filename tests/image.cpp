@@ -7,23 +7,6 @@ using namespace simrec;
 
 BOOST_AUTO_TEST_SUITE( image_tests )
 
-BOOST_AUTO_TEST_CASE( open_image ) {
-    int width = 241;
-    int height = 964;
-
-    int x = 30;
-    int y = 300;
-    
-    std::string filename("./../../misc/sinogram_241x964_8bit.raw");
-    
-    Image image(filename.c_str(), width, height);
-
-    BOOST_CHECK_EQUAL(image.getWidth(), width);
-    BOOST_CHECK_EQUAL(image.getHeight(), height);
-    BOOST_CHECK_EQUAL(image.getSize(), width*height);
-    BOOST_CHECK_EQUAL(image.getPixelValue(x,y) != 0, true);
-}
-
 int sumPixelsInRow(Image image, int width, int rowIndex)
 {
     int sum = 0;
@@ -41,6 +24,27 @@ int sumPixelsInColumn(Image image, int height, int columnIndex)
     
     return sum;
 }
+
+BOOST_AUTO_TEST_CASE( open_image ) {
+    int width = 241;
+    int height = 964;
+
+    int x = 30;
+    int y = 300;
+    
+    std::string filename("./../../misc/sinogram_241x964_8bit.raw");
+    
+    Image image(filename.c_str(), width, height);
+
+//    int sum = sumPixelsInRow(image, width, 1);
+//    BOOST_CHECK_EQUAL(sum, 0);
+    BOOST_CHECK_EQUAL(image.getWidth(), width);
+    BOOST_CHECK_EQUAL(image.getHeight(), height);
+    BOOST_CHECK_EQUAL(image.getSize(), width*height);
+    BOOST_CHECK_EQUAL(image.getPixelValue(x,y) != 0, true);
+}
+
+
 
 BOOST_AUTO_TEST_CASE ( upscale_image) {
     int width = 5;
