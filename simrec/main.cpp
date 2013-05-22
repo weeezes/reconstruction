@@ -17,28 +17,28 @@ int main(int argc, char* argv[]) {
     
     Image img(filename, x_size, y_size);
     
-    std::cout << "Image: " << std::endl;
+//    std::cout << "Image: " << std::endl;
 
-    for (int y=0; y<img.getHeight(); y++)
-    {
-        for (int x=0; x<img.getWidth(); x++)
-        {
-            std::cout << img.getPixelValue(x,y) << " ";
-        }
-        std::cout << std::endl;
-    }
+//    for (int y=0; y<img.getHeight(); y++)
+//    {
+//        for (int x=0; x<img.getWidth(); x++)
+//        {
+//            std::cout << img.getPixelValue(x,y) << " ";
+//        }
+//        std::cout << std::endl;
+//    }
  
     img.upscaleToClosestPowerOfTwo();
 
-    std::cout << "Scaled image: " << std::endl;
+//    std::cout << "Scaled image: " << std::endl;
 
-    for (int y=0; y<img.getHeight(); y++)
-    {
-        for (int x=0; x<img.getWidth(); x++)
-        {
-            std::cout << img.getPixelValue(x,y) << " ";
-        }
-        std::cout << std::endl;
-    }
+//    for (int y=0; y<img.getHeight(); y++)
+//    {
+//        for (int x=0; x<img.getWidth(); x++)
+//        {
+//            std::cout << img.getPixelValue(x,y) << " ";
+//        }
+//        std::cout << std::endl;
+//    }
     return 0;
 }
