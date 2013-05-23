@@ -7,7 +7,7 @@ using namespace simrec;
 
 BOOST_AUTO_TEST_SUITE( image_tests )
 
-int sumPixelsInRow(Image image, int width, int rowIndex)
+int sumPixelsInRow(Image &image, int width, int rowIndex)
 {
     int sum = 0;
     for (int x=0; x<width; x++)
@@ -16,7 +16,7 @@ int sumPixelsInRow(Image image, int width, int rowIndex)
     return sum;
 }
 
-int sumPixelsInColumn(Image image, int height, int columnIndex)
+int sumPixelsInColumn(Image &image, int height, int columnIndex)
 {
     int sum = 0;
     for (int y=0; y<height; y++)
@@ -36,15 +36,11 @@ BOOST_AUTO_TEST_CASE( open_image ) {
     
     Image image(filename.c_str(), width, height);
 
-//    int sum = sumPixelsInRow(image, width, 1);
-//    BOOST_CHECK_EQUAL(sum, 0);
     BOOST_CHECK_EQUAL(image.getWidth(), width);
     BOOST_CHECK_EQUAL(image.getHeight(), height);
     BOOST_CHECK_EQUAL(image.getSize(), width*height);
     BOOST_CHECK_EQUAL(image.getPixelValue(x,y) != 0, true);
 }
-
-
 
 BOOST_AUTO_TEST_CASE ( upscale_image) {
     int width = 5;
@@ -58,13 +54,34 @@ BOOST_AUTO_TEST_CASE ( upscale_image) {
     int newWidth = 8;
     int newHeight = 8;
 
-    BOOST_CHECK_EQUAL(sumPixelsInRow(image, newWidth, 0), 0);
-    //BOOST_CHECK_EQUAL(sumPixelsInRow(image, newWidth, 6), 0);
-    //BOOST_CHECK_EQUAL(sumPixelsInRow(image, newWidth, 7), 0);
+    int sum = 0;
+    for (int y=0; y<newHeight; y++)
+        sum += image.getPixelValue(0, y);
 
-    //BOOST_CHECK_EQUAL(sumPixelsInColumn(image, newHeight, 0), 0);
-    //BOOST_CHECK_EQUAL(sumPixelsInColumn(image, newHeight, 6), 0);
-    //BOOST_CHECK_EQUAL(sumPixelsInColumn(image, newHeight, 7), 0);
+    BOOST_CHECK_EQUAL(sumPixelsInRow(image,newWidth, 0), 0);
+    BOOST_CHECK_EQUAL(sumPixelsInRow(image, newWidth, 6), 0);
+    BOOST_CHECK_EQUAL(sumPixelsInRow(image, newWidth, 7), 0);
+
+    BOOST_CHECK_EQUAL(sumPixelsInColumn(image, newHeight, 0), 0);
+    BOOST_CHECK_EQUAL(sumPixelsInColumn(image, newHeight, 6), 0);
+    BOOST_CHECK_EQUAL(sumPixelsInColumn(image, newHeight, 7), 0);
+
+    BOOST_CHECK_EQUAL(image.getPixelValue(2, 1), 1); 
+    BOOST_CHECK_EQUAL(image.getPixelValue(4, 1), 1);
+
+    BOOST_CHECK_EQUAL(image.getPixelValue(1, 2), 1);
+    BOOST_CHECK_EQUAL(image.getPixelValue(3, 2), 1);
+    BOOST_CHECK_EQUAL(image.getPixelValue(5, 2), 1);
+
+    BOOST_CHECK_EQUAL(image.getPixelValue(2, 3), 1);
+    BOOST_CHECK_EQUAL(image.getPixelValue(4, 3), 1);
+
+    BOOST_CHECK_EQUAL(image.getPixelValue(1, 4), 1);
+    BOOST_CHECK_EQUAL(image.getPixelValue(3, 4), 1);
+    BOOST_CHECK_EQUAL(image.getPixelValue(5, 4), 1);
+
+    BOOST_CHECK_EQUAL(image.getPixelValue(2, 5), 1);
+    BOOST_CHECK_EQUAL(image.getPixelValue(4, 5), 1);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -10,7 +10,7 @@ add_definitions(
     -DBOOST_TEST_DYN_LINK
 )
 
-file( GLOB TEST_SOURCES test.cpp sample.cpp image.cpp )
+file( GLOB TEST_SOURCES test.cpp sample.cpp image.cpp algorithms.cpp )
 add_executable(run_tests ${TEST_SOURCES})
 
 target_link_libraries(run_tests Simrec ${Boost_LIBRARIES})

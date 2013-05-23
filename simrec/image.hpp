@@ -5,6 +5,8 @@
 #include <iostream>
 #include <complex>
 
+#include "algorithms.hpp"
+
 namespace simrec {
 
 /* Image reads 8-bit black and white raw image data and 
@@ -29,9 +31,11 @@ private:
     int height;
     int size;
 
+    // deny copying of the object
+    Image(const Image& other);
+
     int findNewSideLength();
     void copyCurrentDataTo(std::complex<double>* newArray, int newSide,int startX, int startY);
-    std::complex<double>* initNewComplexArray(int size);
     void replaceCurrentDataWith(std::complex<double>* newData);
 
 };

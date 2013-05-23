@@ -19,7 +19,7 @@ Image::Image(const char* filename, int width, int height)
             imageStream.read(data, size);
             imageStream.close();
             
-            this->imageData = initNewComplexArray(size);
+            this->imageData = algorithms::initNewComplexArray(size);
             for (int i=0; i<size; i++)
                 this->imageData[i] = std::polar(data[i]*1.0, 0.0);
 
@@ -38,7 +38,7 @@ Image::Image(const char* filename, int width, int height)
         this->height = -1;
         this->size = -1;
         
-        this->imageData = initNewComplexArray(1);
+        this->imageData = algorithms::initNewComplexArray(1);
     }
 
 
@@ -78,7 +78,7 @@ void Image::upscaleToClosestPowerOfTwo()
 
     int newSize = newSide*newSide;
 
-    std::complex<double>* scaledData = initNewComplexArray(newSize);
+    std::complex<double>* scaledData = algorithms::initNewComplexArray(newSize);
     
     // Calculate the spot where to start adding data
     // so that it gets centered into the new bigger array
@@ -123,17 +123,6 @@ void Image::copyCurrentDataTo(std::complex<double>* newArray, int newSide, int s
             newArray[(y+startY)*newSide + (x+startX)] = this->imageData[y*getWidth()+x];
         }
     }
-}
-
-std::complex<double>* Image::initNewComplexArray(int size)
-{
-    std::complex<double>* complexArray = new std::complex<double>[size];
-    for (int i=0; i<size; i++)
-    {
-        complexArray[i] = std::polar(0.0, 0.0);
-    }
-
-    return complexArray;
 }
 
 void Image::replaceCurrentDataWith(std::complex<double>* newData)
