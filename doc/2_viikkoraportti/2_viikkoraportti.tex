@@ -35,7 +35,7 @@
 
 	\end{titlepage}
 
-    \section*{Selvity}
+    \section*{Selvitys}
     2. viikko oli ensimmäistä viikkoa rakentavampi, ja sain pidettyä edellisviikolla asetetuista tavoitteista melko hyvin kiinni. Käytin melko paljon aikaa Cooleyn \& Tukeyn FFT-algoritmin ihmettelyyn, ja huomasin tarvitsevani muutamia apufunktioita järkevää toteutusta varten. 
     
     Toteutin \textbf{Image}-luokkaan skaalausfunktion, mikä skaalaa kuvan pidemmän sivun mukaan lähimpään 2:n potenssiin. Alkuperäinen kuvadata ympäröidään nollilla, eli kuvadata pysyy alkuperäisessä muodossaan, sen sisältävä taulu muuttaa kokoa. Tämän toiminnon testit eivät millään tahtoneet toimia, mutta debugausharjoittelun myötä ongelma selvisi. Ongelma piili siinä, että Image-olioista ei pystynyt luomaan kunnollisia kopioita. Tämä aiheutti ongelmia muistissa, kun oliokopiot yrittivät molemmat tyhjentää samaa aluetta muistista. Ongelma ratkesi käyttämällä kopion sijaan referenssiä. Päätin myös tehdä kopiointikonstruktorista privaatin ja näin estää kopioiden luominen luokan ulkopuolella kokonaan. Kiitos Topi Talvitielle (nick Sharp) debugausvalmennuksesta ja muustakin avusta tämän ongelman ratkaisussa.
