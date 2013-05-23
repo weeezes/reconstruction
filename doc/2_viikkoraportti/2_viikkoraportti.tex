@@ -1,0 +1,53 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8x]{inputenc}
+\usepackage{ucs}
+\usepackage[finnish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[figurename=Kuva, tablename=Taulukko]{caption}
+
+\author{Vesa Hagström}
+
+\begin{document}
+    \renewcommand{\bibname}{Viitteet}
+
+	\begin{titlepage}
+    \label{Title}
+	\begin{flushleft}
+		\hfill Vesa Hagström 											\\
+		\hfill \texttt{vesa.hagstrom@helsinki.fi} 						\\
+		\hfill Op.Nro: 013865575											\\
+		\hfill Tiralabra harjoitustyö									\\
+		\hfill 23.5.2013													\\
+	\end{flushleft}
+
+	\vfill
+
+	\begin{center}
+		\huge{2. Viikkoraportti}
+	\end{center}
+
+	\vfill
+
+	\end{titlepage}
+
+    \section*{Selvity}
+    2. viikko oli ensimmäistä viikkoa rakentavampi, ja sain pidettyä edellisviikolla asetetuista tavoitteista melko hyvin kiinni. Käytin melko paljon aikaa Cooleyn \& Tukeyn FFT-algoritmin ihmettelyyn, ja huomasin tarvitsevani muutamia apufunktioita järkevää toteutusta varten. 
+    
+    Toteutin \textbf{Image}-luokkaan skaalausfunktion, mikä skaalaa kuvan pidemmän sivun mukaan lähimpään 2:n potenssiin. Alkuperäinen kuvadata ympäröidään nollilla, eli kuvadata pysyy alkuperäisessä muodossaan, sen sisältävä taulu muuttaa kokoa. Tämän toiminnon testit eivät millään tahtoneet toimia, mutta debugausharjoittelun myötä ongelma selvisi. Ongelma piili siinä, että Image-olioista ei pystynyt luomaan kunnollisia kopioita. Tämä aiheutti ongelmia muistissa, kun oliokopiot yrittivät molemmat tyhjentää samaa aluetta muistista. Ongelma ratkesi käyttämällä kopion sijaan referenssiä. Päätin myös tehdä kopiointikonstruktorista privaatin ja näin estää kopioiden luominen luokan ulkopuolella kokonaan. Kiitos Topi Talvitielle (nick Sharp) debugausvalmennuksesta ja muustakin avusta tämän ongelman ratkaisussa.
+    
+    Päätin luoda algoritmien funktiot omaan namespaceensa simrec-namespacen sisälle. Täällä "algorithms" namespacessa on tällä hetkellä asioita, mitkä eivät sinne ehkä kuulu, kuten funktiot \textbf{initNewComplexArray}, \textbf{isAPowerOfTwo} ja \textbf{splitArrayToEvenAndOdd}. Luultavasti teen näille jonkin "utility" namespacen, minne kuuluu tämäntyyppiset kätevät pikkufunktiot. 
+
+    Sain toimivan Cooley \& Tukey FFT:n implementoitua yksiulotteiselle datalle (algorithms::fft(data, length)). Tämän lisäksi algorithms namespaceen tulee 2D FFT, sekä lopulta Filtered Back Projection -algoritmi. Voi olla, että tämäkin rakenne muuttuu vielä, mutta tällä hetkellä se tuntuu mielekkäältä.
+    
+    FFT:n toteutuksessa kompastuin melko pitkäksi aikaa hölmöön virheeseen: olin tulkinnut Cooley \& Tukey:n pseudokoodia väärin, sillä siinä for $k=0$ to $N/2-1$ toki tarkoitti auki kirjoitettuna for $($int $k=0$; k $<= N/2-1$; $k++)$ eikä for $($int $k=0$; k $< N/2-1$; $k++)$, kuten olin sen aluksi tulkinnut. Tämä taisi olla ihan hyvä opetus siitä, että varsinkin pseudoa lukiessa tulee olla erittäin tarkkana.
+    
+    \section*{Mitä seuraavaksi?}
+    Seuraavaksi käytän toimivaa FFT:tä 2D FFT:n implementoimiseen, tässä voidaan hyödyntää Fourier muunnoksen separoituvuutta: suoritetaan 1D FFT ensin kuvan riveille ja sitten sarakkeille. Mahdollisesti pääsen itse Filtered Back Projectionin kimppuun myös, ellei suuria yllätyksiä tule.
+    Yritän myös saada Doxygenin toimimaan mahdollisimman nopeasti, jotta viitsisin aloittaa järkevän koodin dokumentoimisen. Nyt olen pyrkinyt halkomaan koodin mahdollisimman pieniin palasiin ja nimeämään funktiot selkeästi.
+     
+\end{document}
