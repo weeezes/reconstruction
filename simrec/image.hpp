@@ -9,9 +9,13 @@
 
 namespace simrec {
 
-/* Image reads 8-bit black and white raw image data and 
- * saves it into an array. 
- */
+///Image reads and contains 8-bit black and white image data.
+
+/**
+* The Image class is used for reading 8-bit image data from a file and to
+* keep track of it's information, mainly the width and height of the image.
+*/
+
 class Image {
 public:
     Image(const char* filename, int width, int height);

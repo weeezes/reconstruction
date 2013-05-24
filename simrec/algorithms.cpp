@@ -2,6 +2,12 @@
 
 using namespace simrec;
 
+/// Fast Fourier Transform, based on the Cooley-Tukey algorithm
+/**
+* Calculates the Fourier transform of the input data in place.
+* @param data input data to transform
+* @param length length of the data
+*/
 void algorithms::fft(std::complex<double>* data, unsigned int length)
 {
     if (length == 1)
@@ -36,6 +42,13 @@ std::complex<double>* algorithms::initNewComplexArray(unsigned int size)
     return complexArray;
 }
 
+/// Splits an array by even and odd indices
+/**
+* @param toSplit the array that gets split.
+* @param length the length of the array, the value is expected to be a power of two.
+* @param oddResult an array with a size of length/2, where the odd index values are saved to
+* @param evenResult an array with a size of length/2, where the even index values are saved to
+*/
 void algorithms::splitArrayToEvenAndOdd(std::complex<double>* toSplit, unsigned int length, std::complex<double>* oddResult, std::complex<double>* evenResult)
 {
     if (!isAPowerOfTwo(length))
@@ -50,7 +63,12 @@ void algorithms::splitArrayToEvenAndOdd(std::complex<double>* toSplit, unsigned 
     }
 }
 
+/**
+* Checks if the input number is a power of two value
+*/
 bool algorithms::isAPowerOfTwo(unsigned int number)
 {
+    // true case: 100 & ( 100 - 1 ) -> 100 & 011 = 0 == 0
+    // false case: 011 & ( 011 - 1 ) -> 011 & 010 = 010 != 0
     return (number & (number-1)) == 0;
 }

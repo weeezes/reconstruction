@@ -4,6 +4,7 @@
 
 namespace simrec {
 
+	/// Namespace that contains all the programs algorithms
     namespace algorithms {
         
         void fft(std::complex<double>* data, unsigned int length);
