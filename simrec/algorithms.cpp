@@ -31,6 +31,27 @@ void algorithms::fft(std::complex<double>* data, unsigned int length)
     delete[] odd;
 }
 
+/// Transposes the given array
+/**
+* @param data the 2D array for transposing
+* @param sideLength the side length for the rectangular data, has to be a value that is a power of two
+*/
+void algorithms::flip2DArray(std::complex<double>* data, unsigned int sideLength)
+{
+	if (!isAPowerOfTwo(sideLength))
+		throw "shieet";
+
+	for (int y=0; y<sideLength; y++)
+	{
+		for (int x=y; x<sideLength; x++)
+		{
+			std::complex<double> tmp = data[y*sideLength+x];
+			data[y*sideLength+x] = data[x*sideLength+y];
+			data[x*sideLength+y] = tmp;
+		}
+	}
+}
+
 std::complex<double>* algorithms::initNewComplexArray(unsigned int size)
 {
     std::complex<double>* complexArray = new std::complex<double>[size];

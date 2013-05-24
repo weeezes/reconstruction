@@ -44,6 +44,24 @@ BOOST_AUTO_TEST_CASE( split_complex_array )
     delete[] odd;
 }
 
+BOOST_AUTO_TEST_CASE( flip_complex_array )
+{
+	int sideLength = 4;
+    std::complex<double>* array = algorithms::initNewComplexArray(sideLength*sideLength);
+    
+	int x = 3;
+	int y = 0;
+	array[y*sideLength+x] = std::complex<double>(2.0, 0.0);
+	array[x*sideLength+y] = std::complex<double>(0.0, 2.0);
+
+	algorithms::flip2DArray(array, sideLength);
+
+	BOOST_CHECK_EQUAL(array[y*sideLength+x], std::complex<double>(0.0, 2.0));
+	BOOST_CHECK_EQUAL(array[x*sideLength+y], std::complex<double>(2.0, 0.0));
+
+    delete[] array;
+}
+
 BOOST_AUTO_TEST_CASE( one_dimensional_fft_1 )
 {
     int size = 4;
