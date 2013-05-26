@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include "image.hpp"
+#include "algorithms.hpp"
 
 using namespace simrec;
 
@@ -29,8 +30,9 @@ int main(int argc, char* argv[]) {
     }
  
     img.upscaleToClosestPowerOfTwo();
-
-    std::cout << "Scaled image: " << std::endl;
+    algorithms::fft2D(img.getData(), img.getWidth());
+    
+    std::cout << "Transformed image: " << std::endl;
 
     for (int y=0; y<img.getHeight(); y++)
     {
