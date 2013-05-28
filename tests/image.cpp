@@ -58,7 +58,7 @@ BOOST_AUTO_TEST_CASE ( upscale_image) {
     for (int y=0; y<newHeight; y++)
         sum += image.getPixelValue(0, y);
 
-    BOOST_CHECK_EQUAL(sumPixelsInRow(image,newWidth, 0), 0);
+    BOOST_CHECK_EQUAL(sumPixelsInRow(image, newWidth, 0), 0);
     BOOST_CHECK_EQUAL(sumPixelsInRow(image, newWidth, 6), 0);
     BOOST_CHECK_EQUAL(sumPixelsInRow(image, newWidth, 7), 0);
 

@@ -2,85 +2,18 @@
 
 #include <complex>
 #include <iostream>
+
+#include "simrec/utils.hpp"
 #include "simrec/algorithms.hpp"
 
 using namespace simrec;
 
 BOOST_AUTO_TEST_SUITE( algorithm_test )
 
-BOOST_AUTO_TEST_CASE( init_complex_array )
-{
-    int size = 4;
-    std::complex<double>* array = algorithms::initNewComplexArray(size);
-    for (int i=0; i<size; i++)
-    {
-        BOOST_CHECK_EQUAL(array[i], std::polar(0.0, 0.0));
-    }
-
-    delete[] array;
-}
-
-BOOST_AUTO_TEST_CASE( split_complex_array )
-{
-    int size = 4;
-    std::complex<double>* array = algorithms::initNewComplexArray(size);
-    for (int i=0; i<size; i++)
-    {
-        array[i] = std::polar(i*1.0, 0.0);
-    }
-
-    std::complex<double>* even = algorithms::initNewComplexArray(2);
-    std::complex<double>* odd = algorithms::initNewComplexArray(2);
-
-    algorithms::splitArrayToEvenAndOdd(array, size, odd, even);
-
-    BOOST_CHECK_EQUAL(even[0], std::polar(0.0, 0.0));
-    BOOST_CHECK_EQUAL(even[1], std::polar(2.0, 0.0));
-    BOOST_CHECK_EQUAL(odd[0], std::polar(1.0, 0.0));
-    BOOST_CHECK_EQUAL(odd[1], std::polar(3.0, 0.0));
-    
-    delete[] array;
-    delete[] even;
-    delete[] odd;
-}
-
-BOOST_AUTO_TEST_CASE( flip_complex_array )
-{
-	int sideLength = 8;
-    std::complex<double>* array = algorithms::initNewComplexArray(sideLength*sideLength);
-    
-    for (int i=0; i<sideLength*sideLength; i++)
-        array[i] = std::complex<double>(i*1.0, 0.0);
-
-    
-	algorithms::flip2DArray(array, sideLength);
-
-//    for (int y=0; y<sideLength; y++)
-//    {
-//        for (int x=0; x<sideLength; x++)
-//            std::cout << array[y*sideLength + x] << " ";
-//        std::cout << std::endl;
-//    }
-
-	BOOST_CHECK_EQUAL(array[0], std::complex<double>(0.0, 0.0));
-    BOOST_CHECK_EQUAL(array[7], std::complex<double>(56.0,0.0));
-    BOOST_CHECK_EQUAL(array[56], std::complex<double>(7.0, 0.0));
-    BOOST_CHECK_EQUAL(array[sideLength*sideLength-1], std::complex<double>(63.0, 0.0));
-
-    algorithms::flip2DArray(array, sideLength);
-
-    BOOST_CHECK_EQUAL(array[0], std::complex<double>(0.0, 0.0));
-    BOOST_CHECK_EQUAL(array[7], std::complex<double>(7.0, 0.0));
-    BOOST_CHECK_EQUAL(array[56], std::complex<double>(56.0, 0.0));
-    BOOST_CHECK_EQUAL(array[sideLength*sideLength-1], std::complex<double>(63.0, 0.0));
-
-    delete[] array;
-}
-
 BOOST_AUTO_TEST_CASE( one_dimensional_fft_1 )
 {
     int size = 4;
-    std::complex<double>* data = algorithms::initNewComplexArray(size);
+    std::complex<double>* data = utils::initNewComplexArray(size);
     for (int i=0; i<size; i++)
         data[i] = std::polar(1.0, 0.0);
 
@@ -97,7 +30,7 @@ BOOST_AUTO_TEST_CASE( one_dimensional_fft_1 )
 BOOST_AUTO_TEST_CASE( one_dimensional_fft_2 )
 {
     int size = 4;
-    std::complex<double>* data = algorithms::initNewComplexArray(size);
+    std::complex<double>* data = utils::initNewComplexArray(size);
 
     data[0] = std::polar(1.0, 0.0);
     data[1] = std::polar(0.0, 0.0);
@@ -120,7 +53,7 @@ BOOST_AUTO_TEST_CASE( one_dimensional_fft_2 )
 BOOST_AUTO_TEST_CASE( two_dimensional_fft_1 )
 {
     int sideLength = 2;
-    std::complex<double>* data = algorithms::initNewComplexArray(sideLength*sideLength);
+    std::complex<double>* data = utils::initNewComplexArray(sideLength*sideLength);
     for (int i=0; i<sideLength*sideLength; i++)
         data[i] = std::polar(1.0, 0.0);
 
@@ -137,7 +70,7 @@ BOOST_AUTO_TEST_CASE( two_dimensional_fft_1 )
 BOOST_AUTO_TEST_CASE( two_dimensional_fft_2 )
 {
     int sideLength = 4;
-    std::complex<double>* data = algorithms::initNewComplexArray(sideLength*sideLength);
+    std::complex<double>* data = utils::initNewComplexArray(sideLength*sideLength);
 
     std::complex<double> zero(0.0, 0.0);
     std::complex<double> one(1.0, 0.0);
@@ -199,7 +132,7 @@ BOOST_AUTO_TEST_CASE( two_dimensional_fft_2 )
 BOOST_AUTO_TEST_CASE( two_dimensional_fft_3 )
 {
     int sideLength = 4;
-    std::complex<double>* data = algorithms::initNewComplexArray(sideLength*sideLength);
+    std::complex<double>* data = utils::initNewComplexArray(sideLength*sideLength);
 
     for (int y=0; y<sideLength; y++)
     {
@@ -207,23 +140,25 @@ BOOST_AUTO_TEST_CASE( two_dimensional_fft_3 )
             data[y*sideLength + x] = std::polar((x+1)*1.0, 0.0);
     }
 
-    for (int y=0; y<sideLength; y++)
-    {
-        for (int x=0; x<sideLength; x++)
-            std::cout << data[y*sideLength + x] << " ";
-        std::cout << std::endl;
-    }
+// print the matrix:
+//    for (int y=0; y<sideLength; y++)
+//    {
+//        for (int x=0; x<sideLength; x++)
+//            std::cout << data[y*sideLength + x] << " ";
+//        std::cout << std::endl;
+//    }
 
-    std::cout << std::endl;
+//    std::cout << std::endl;
 
     algorithms::fft2D(data, sideLength);
 
-    for (int y=0; y<sideLength; y++)
-    {
-        for (int x=0; x<sideLength; x++)
-            std::cout << data[y*sideLength + x] << " ";
-        std::cout << std::endl;
-    }
+// print the matrix
+//    for (int y=0; y<sideLength; y++)
+//    {
+//        for (int x=0; x<sideLength; x++)
+//            std::cout << data[y*sideLength + x] << " ";
+//        std::cout << std::endl;
+//    }
 
     BOOST_CHECK_EQUAL(data[0], std::polar(4.0, 0.0));
     BOOST_CHECK_EQUAL(data[1], std::polar(8.0, 0.0));

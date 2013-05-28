@@ -30,7 +30,7 @@ int main(int argc, char* argv[]) {
     }
  
     img.upscaleToClosestPowerOfTwo();
-    algorithms::fft2D(img.getData(), img.getWidth());
+    algorithms::fft2D(img.getData().toArray(), img.getWidth());
     
     std::cout << "Transformed image: " << std::endl;
 

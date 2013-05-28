@@ -12,15 +12,15 @@ using namespace simrec;
 * @param height the height of the image
 */
 Image::Image(const char* filename, int width, int height)
+    : imageData(width*height)
 {
     std::ifstream imageStream(filename, std::ios::in | std::ios::binary | std::ios::ate);
 
- 
     if (imageStream.good())
     {   
         std::ifstream::pos_type size = imageStream.tellg();
 
-        if (size == width*height)
+        if (size == this->imageData.getSize())
         {       
             char* data = new char[size];
             
@@ -28,7 +28,6 @@ Image::Image(const char* filename, int width, int height)
             imageStream.read(data, size);
             imageStream.close();
             
-            this->imageData = algorithms::initNewComplexArray(size);
             for (int i=0; i<size; i++)
                 this->imageData[i] = std::polar(data[i]*1.0, 0.0);
 
@@ -40,31 +39,25 @@ Image::Image(const char* filename, int width, int height)
             this->height = height;
             this->size = size; 
         }
+        else
+        {
+            throw "Wrong image dimensions!";
+        }
     }
     else
     {
-        this->width = -1;
-        this->height = -1;
-        this->size = -1;
-        
-        this->imageData = algorithms::initNewComplexArray(1);
+        throw "Can't read the image file!";
     }
 
 
 }
 
-///Default destructor
-Image::~Image()
-{
-    delete[] this->imageData;
-}
-
-int Image::getWidth()
+int Image::getWidth() const
 {
     return width;
 }
 
-int Image::getHeight()
+int Image::getHeight() const
 {
     return height;
 }
@@ -72,7 +65,7 @@ int Image::getHeight()
 /**
 * @return the size as the number of pixels in the contained image
 */
-int Image::getSize()
+int Image::getSize() const
 {
     return size;
 }
@@ -82,12 +75,12 @@ int Image::getSize()
 * @param y the y coordinate value of the pixel
 * @return the value of the pixel as a real number
 */
-int Image::getPixelValue(int x, int y)
+int Image::getPixelValue(int x, int y) const
 {
     if (x >= 0 && y >= 0 && x < width && y < height)
-        return std::abs(imageData[y*width + x]);
+        return std::abs(this->imageData.get(y*width + x));
     else
-        return -1;
+        throw "Index out of range!"; 
 }
 
 /// Upscales the image
@@ -105,7 +98,7 @@ void Image::upscaleToClosestPowerOfTwo()
 
     int newSize = newSide*newSide;
 
-    std::complex<double>* scaledData = algorithms::initNewComplexArray(newSize);
+    ComplexArray scaledData(newSize);
     
     // Calculate the spot where to start adding data
     // so that it gets centered into the new bigger array
@@ -114,14 +107,13 @@ void Image::upscaleToClosestPowerOfTwo()
 
     copyCurrentDataTo(scaledData, newSide, startX, startY);
 
-    replaceCurrentDataWith(scaledData);
-
+    this->imageData = scaledData;
     this->size = newSize;
     this->width = newSide;
     this->height = newSide;
 }
 
-std::complex<double>* Image::getData()
+ComplexArray Image::getData()
 {
     return imageData;
 }
@@ -155,20 +147,13 @@ int Image::findNewSideLength()
 * @param startX the x coordinate value for the starting point for the original data in the new array
 * @param startY the y coordinate value for the starting point for the original data in the new array
 */
-void Image::copyCurrentDataTo(std::complex<double>* newArray, int newSide, int startX, int startY)
+void Image::copyCurrentDataTo(ComplexArray& newArray, int newSide, int startX, int startY)
 {
     for (int y=0; y<getHeight(); y++)
     {
         for (int x=0; x<getWidth(); x++)
         {
-            newArray[(y+startY)*newSide + (x+startX)] = this->imageData[y*getWidth()+x];
+            newArray[(y+startY)*newSide + (x+startX)] = this->imageData.get(y*getWidth()+x);
         }
     }
-}
-
-void Image::replaceCurrentDataWith(std::complex<double>* newData)
-{
-    delete[] this->imageData;
-    
-    this->imageData = newData;
 }

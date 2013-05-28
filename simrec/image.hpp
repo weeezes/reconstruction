@@ -5,7 +5,7 @@
 #include <iostream>
 #include <complex>
 
-#include "algorithms.hpp"
+#include "complex_array.hpp"
 
 namespace simrec {
 
@@ -19,18 +19,17 @@ namespace simrec {
 class Image {
 public:
     Image(const char* filename, int width, int height);
-    ~Image();
 
-    int getWidth();
-    int getHeight();
-    int getSize();
-    int getPixelValue(int x, int y);
+    int getWidth() const;
+    int getHeight() const;
+    int getSize() const;
+    int getPixelValue(int x, int y) const;
     
     void upscaleToClosestPowerOfTwo();
-    std::complex<double>* getData();
+    ComplexArray getData();
 
 private:
-    std::complex<double>* imageData;
+    ComplexArray imageData;
     int width;
     int height;
     int size;
@@ -39,8 +38,7 @@ private:
     Image(const Image& other);
 
     int findNewSideLength();
-    void copyCurrentDataTo(std::complex<double>* newArray, int newSide,int startX, int startY);
-    void replaceCurrentDataWith(std::complex<double>* newData);
+    void copyCurrentDataTo(ComplexArray& newArray, int newSide,int startX, int startY);
 
 };
 
