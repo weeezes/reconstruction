@@ -1,5 +1,7 @@
 #include <iostream>
 #include <stdlib.h>
+
+#include "utils.hpp"
 #include "image.hpp"
 #include "algorithms.hpp"
 
@@ -16,7 +18,7 @@ int main(int argc, char* argv[]) {
     int x_size = atoi(argv[2]);
     int y_size = atoi(argv[3]);
     
-    Image img(filename, x_size, y_size);
+    Image img(utils::readFile(filename, x_size*y_size), x_size, y_size);
     
     std::cout << "Image: " << std::endl;
 

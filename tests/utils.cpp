@@ -8,6 +8,22 @@ using namespace simrec;
 
 BOOST_AUTO_TEST_SUITE( utils_test )
 
+BOOST_AUTO_TEST_CASE( read_file ) {
+    int width = 241;
+    int height = 964;
+
+    int x = 30;
+    int y = 300;
+    
+    std::string filename("./../../misc/sinogram_241x964_8bit.raw");
+    
+    ComplexArray file = utils::readFile(filename.c_str(), width*height);
+
+    BOOST_CHECK_EQUAL( file.getSize(), width*height );
+	
+    BOOST_CHECK( file[y*width+x] != std::complex<double>(0.0, 0.0) );
+}
+
 BOOST_AUTO_TEST_CASE( init_complex_array )
 {
     int size = 4;

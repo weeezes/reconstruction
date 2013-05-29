@@ -3,8 +3,6 @@
 
 #include <complex>
 
-#include "utils.hpp"
-
 namespace simrec {
 
 /// An array with a fixed size containing complex values

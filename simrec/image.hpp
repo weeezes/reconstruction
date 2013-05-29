@@ -18,7 +18,7 @@ namespace simrec {
 
 class Image {
 public:
-    Image(const char* filename, int width, int height);
+    Image(ComplexArray data, int width, int height);
 
     int getWidth() const;
     int getHeight() const;

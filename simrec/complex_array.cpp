@@ -5,7 +5,7 @@ using namespace simrec;
 ComplexArray::ComplexArray(int size)
 {
     this->size = size;
-    this->array = utils::initNewComplexArray(size);
+    this->array = new std::complex<double>[size];
 }
 
 ComplexArray::ComplexArray(const ComplexArray& other)
@@ -38,8 +38,7 @@ std::complex<double> ComplexArray::get(int index) const
  */
 std::complex<double>* ComplexArray::toArray() const
 {
-    std::complex<double>* copy = utils::initNewComplexArray(this->size);
-
+    std::complex<double>* copy = new std::complex<double>[this->size];
     for (int i=0; i<this->size; i++)
         copy[i] = this->array[i];
         

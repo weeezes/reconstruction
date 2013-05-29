@@ -2,16 +2,39 @@
 
 using namespace simrec;
 
-std::complex<double>* utils::sliceArray(std::complex<double>* array, unsigned int start, unsigned int stop)
+ComplexArray utils::readFile(const char* filename, const int expectedBytes)
 {
-    if (stop <= start)
-        throw "Stop can't be lower than start";
+	std::ifstream stream(filename, std::ios::in | std::ios::binary | std::ios::ate);
 
-    std::complex<double>* slice = utils::initNewComplexArray(stop-start);
-    for (int i=start, k=0; i<stop; i++, k++)
-        slice[k] = array[i];
+	if (stream.good())
+	{   
+		std::ifstream::pos_type size = stream.tellg();
 
-    return slice;
+		if (size == expectedBytes)
+		{       
+			char* raw = new char[size];
+			ComplexArray data(size);
+
+			stream.seekg(0, std::ios::beg);
+			stream.read(raw, size);
+			stream.close();
+
+			for (int i=0; i<size; i++)
+				data[i] = std::polar(raw[i]*1.0, 0.0);
+
+			delete[] raw;
+
+			return data;
+		}
+		else
+		{
+			throw "Expected size differs from the files size!";
+		}
+	}
+	else
+	{
+		throw "Can't read the file!";
+	}
 }
 
 /// Transposes the given array
@@ -44,6 +67,18 @@ std::complex<double>* utils::initNewComplexArray(unsigned int size)
     }
 
     return complexArray;
+}
+
+std::complex<double>* utils::sliceArray(std::complex<double>* array, unsigned int start, unsigned int stop)
+{
+    if (stop <= start)
+        throw "Stop can't be lower than start";
+
+    std::complex<double>* slice = utils::initNewComplexArray(stop-start);
+    for (int i=start, k=0; i<stop; i++, k++)
+        slice[k] = array[i];
+
+    return slice;
 }
 
 /// Splits an array by even and odd indices

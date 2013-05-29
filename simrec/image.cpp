@@ -11,45 +11,13 @@ using namespace simrec;
 * @param width the width of the image
 * @param height the height of the image
 */
-Image::Image(const char* filename, int width, int height)
+Image::Image(ComplexArray data, int width, int height)
     : imageData(width*height)
 {
-    std::ifstream imageStream(filename, std::ios::in | std::ios::binary | std::ios::ate);
+            this->imageData = data;
 
-    if (imageStream.good())
-    {   
-        std::ifstream::pos_type size = imageStream.tellg();
-
-        if (size == this->imageData.getSize())
-        {       
-            char* data = new char[size];
-            
-            imageStream.seekg(0, std::ios::beg);
-            imageStream.read(data, size);
-            imageStream.close();
-            
-            for (int i=0; i<size; i++)
-                this->imageData[i] = std::polar(data[i]*1.0, 0.0);
-
-            delete[] data;
-
-            //cout << "Image reading ready!" << endl;
-            
             this->width = width;
             this->height = height;
-            this->size = size; 
-        }
-        else
-        {
-            throw "Wrong image dimensions!";
-        }
-    }
-    else
-    {
-        throw "Can't read the image file!";
-    }
-
-
 }
 
 int Image::getWidth() const
