@@ -1,6 +1,8 @@
 #include <iostream>
 #include <stdlib.h>
 
+#include <complex>
+
 #include "utils.hpp"
 #include "image.hpp"
 #include "algorithms.hpp"
@@ -32,7 +34,10 @@ int main(int argc, char* argv[]) {
     }
  
     img.upscaleToClosestPowerOfTwo();
-    algorithms::fft2D(img.getData().toArray(), img.getWidth());
+
+    std::complex<double>* data = img.getData().toArray();
+
+    algorithms::fft2D(data, img.getWidth());
     
     std::cout << "Transformed image: " << std::endl;
 
@@ -40,9 +45,23 @@ int main(int argc, char* argv[]) {
     {
         for (int x=0; x<img.getWidth(); x++)
         {
-            std::cout << img.getPixelValue(x,y) << " ";
+            std::cout << std::abs(data[y*img.getWidth()+x]) << " ";
         }
         std::cout << std::endl;
     }
+
+    algorithms::ifft2D(data, img.getWidth());
+    
+    std::cout << "Inverse transformed image: " << std::endl;
+
+    for (int y=0; y<img.getHeight(); y++)
+    {
+        for (int x=0; x<img.getWidth(); x++)
+        {
+            std::cout << std::abs(data[y*img.getWidth()+x]) << " ";
+        }
+        std::cout << std::endl;
+    }
+
     return 0;
 }

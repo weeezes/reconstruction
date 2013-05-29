@@ -13,6 +13,9 @@ namespace simrec {
         void fft(std::complex<double>* data, unsigned int length);
 	    void fft2D(std::complex<double>* data, unsigned int sideLength);
 
+        void ifft(std::complex<double>* data, unsigned int length);
+	    void ifft2D(std::complex<double>* data, unsigned int sideLength);
+
     }
 
 }
