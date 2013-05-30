@@ -46,6 +46,11 @@ void algorithms::fft2D(std::complex<double>* data, unsigned int sideLength)
     if (!utils::isAPowerOfTwo(sideLength))
         throw "Not a power of two!";
 
+    for (int y=0; y<sideLength; y++)
+    { 
+        algorithms::fft(&data[y*sideLength], sideLength);
+    }
+
     utils::flip2DArray(data, sideLength);
 
     for (int y=0; y<sideLength; y++)
@@ -95,6 +100,25 @@ void algorithms::ifft(std::complex<double>* data, unsigned int length)
 * @param sideLength the sides length of the rectangular data. Must be a value that
 * is a power of two
 */
+//void algorithms::ifft2D(std::complex<double>* data, unsigned int sideLength)
+//{
+//    if (!utils::isAPowerOfTwo(sideLength))
+//        throw "Not a power of two!";
+//
+//    utils::flip2DArray(data, sideLength);
+//
+//    for (int y=0; y<sideLength; y++)
+//    { 
+//        algorithms::ifft(&data[y*sideLength], sideLength);
+//    }
+//
+//    utils::flip2DArray(data, sideLength);
+//
+//	for (int i=0; i<sideLength*sideLength; i++)
+//		data[i] = data[i]/std::complex<double>(8.0, 0.0);
+//
+//}
+
 void algorithms::ifft2D(std::complex<double>* data, unsigned int sideLength)
 {
     if (!utils::isAPowerOfTwo(sideLength))
@@ -105,11 +129,20 @@ void algorithms::ifft2D(std::complex<double>* data, unsigned int sideLength)
     for (int y=0; y<sideLength; y++)
     { 
         algorithms::ifft(&data[y*sideLength], sideLength);
+
+        for (int i=y*sideLength; i<y*sideLength+sideLength; i++)
+            data[i] = data[i]/std::complex<double>(sideLength, 0.0);
     }
+        
 
     utils::flip2DArray(data, sideLength);
 
-	for (int i=0; i<sideLength*sideLength; i++)
-		data[i] = data[i]/std::complex<double>(8.0, 0.0);
+    for (int y=0; y<sideLength; y++)
+    { 
+        algorithms::ifft(&data[y*sideLength], sideLength);
+
+        for (int i=y*sideLength; i<y*sideLength+sideLength; i++)
+            data[i] = data[i]/std::complex<double>(sideLength, 0.0);
+    }
 
 }
