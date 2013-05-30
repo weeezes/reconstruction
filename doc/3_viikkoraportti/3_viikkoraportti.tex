@@ -1,0 +1,60 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8x]{inputenc}
+\usepackage{ucs}
+\usepackage[finnish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[figurename=Kuva, tablename=Taulukko]{caption}
+
+\author{Vesa Hagström}
+
+\begin{document}
+    \renewcommand{\bibname}{Viitteet}
+
+	\begin{titlepage}
+    \label{Title}
+	\begin{flushleft}
+		\hfill Vesa Hagström 											\\
+		\hfill \texttt{vesa.hagstrom@helsinki.fi} 						\\
+		\hfill Op.Nro: 013865575											\\
+		\hfill Tiralabra harjoitustyö									\\
+		\hfill 30.5.2013													\\
+	\end{flushleft}
+
+	\vfill
+
+	\begin{center}
+		\huge{3. Viikkoraportti}
+	\end{center}
+
+	\vfill
+
+	\end{titlepage}
+
+    \section*{Selvitys}
+    Käytin kolmannen viikon pääasiassa koodin refaktoroimiseen. Aloitin myös luokkien ja metodien kommentoimisen. Käytän koodin API:n dokumentin luomiseen Doxygen-työkalua, mikä tuottaa koodin kommenteista hieman samankaltaisen tuloksen kuin minkä JavaDoc tekee. 
+        
+    Sain tällä viikolla myös implementoitua algoritmin FFT:n laskemiselle kaksiulotteisesta datasta. 2D FFT voidaan laskea suorittamalla datalle 1D FFT ensin riveittäin, sitten sarakkeittain. Tämä voidaan tehdä separoituvalle funktiolle, koska näille voidaan osoittaa seuraava:
+    
+    
+    \begin{equation*}
+        g(x,y) = g_{x}(x)g_{y}(y)
+    \end{equation*}
+
+    \begin{equation*}
+        \mathcal{F}[g(x,y)] = \mathcal{F}_{x}[g(x)]\mathcal{F}_{y}[g(y)]
+    \end{equation*}
+    
+    Olin ensin toteuttanut 2D FFT:ni väärin, koska en ollut osannut luoda testeilleni testidataa oikein. Ihmettelin pitkään miksi vääräksi korjaamani toteutus toimi, eikä teorian mukainen toiminut, mutta onneksi virhe löytyi. 
+    
+    Toteutin myös käänteismuunnoksen FFT:lleni. Tässä hauskaksi ominaisuudeksi osoittui Fourier -käänteismuunnoksen ominaisuus verrattuna Fourier -muunnokseen: ainoastaan kaksi -1 kerrointa FFT algoritmissa tarvitsee muuttaa positiivisiksi iFFT:n laskemiseksi.
+    
+    
+    \section*{Mitä seuraavaksi?}
+    Nyt kun koodi on melko siistiä ja kommentointi liki ~100\% kattavaa, ja minulla on valmiina kaikki FFT:hen liittyvä, voin siirtyä toteuttamaan Filtered Back Projection -algoritmia. Tavoitteenani oli päästä toteuttamaan tätä jo menneellä viikolla, mutta ongelmat 2D FFT:ni kanssa hieman hidastivat. Halusin myös saada häiritsevät refaktorointia kaipaavat kohdat koodista siistittyä. Nyt alkaa vihdoin näyttämään siltä, että projektista voi jopa syntyä jotakin valmista!
+     
+\end{document}

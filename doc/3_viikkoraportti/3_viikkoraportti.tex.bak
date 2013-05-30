@@ -1,0 +1,59 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8x]{inputenc}
+\usepackage{ucs}
+\usepackage[finnish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[figurename=Kuva, tablename=Taulukko]{caption}
+
+\author{Vesa Hagström}
+
+\begin{document}
+    \renewcommand{\bibname}{Viitteet}
+
+	\begin{titlepage}
+    \label{Title}
+	\begin{flushleft}
+		\hfill Vesa Hagström 											\\
+		\hfill \texttt{vesa.hagstrom@helsinki.fi} 						\\
+		\hfill Op.Nro: 013865575											\\
+		\hfill Tiralabra harjoitustyö									\\
+		\hfill 30.5.2013													\\
+	\end{flushleft}
+
+	\vfill
+
+	\begin{center}
+		\huge{3. Viikkoraportti}
+	\end{center}
+
+	\vfill
+
+	\end{titlepage}
+
+    \section*{Selvitys}
+    Käytin kolmannen viikon pääasiassa koodin refaktoroimiseen. Aloitin myös luokkien ja metodien kommentoimisen. Koodin dokumentin luomiseen Doxygen-työkalua, mikä tuottaa koodin kommenteista hieman samankaltaisen tuloksen kuin minkä JavaDoc tekee.
+        
+    Sain tällä viikolla myös implementoitua algoritmin FFT:n laskemiselle kaksiulotteisesta datasta. 2D FFT voidaan laskea suorittamalla datalle 1D FFT ensin riveittäin, sitten sarakkeittain. Tämä voidaan tehdä separoituvalle funktiolle, koska näille voidaan osoittaa seuraava:
+    
+    
+    \begin{equation*}
+        g(x,y) = g_{x}(x)g_{y}(y)
+    \end{equation*}
+
+    \begin{equation*}
+        \mathcal{F}[g(x,y)] = \mathcal{F}_{x}[g(x)]\mathcal{F}_{y}[g(y)]
+    \end{equation*}
+    
+    Olin ensin toteuttanut 2D FFT:ni väärin, koska en ollut osannut luoda testeilleni testidataa oikein. Ihmettelin pitkään miksi vääräksi korjaamani toteutus toimi, eikä teorian mukainen toiminut, mutta onneksi virhe löytyi. 
+    
+    Toteutin myös käänteismuunnoksen FFT:lleni. 
+    \section*{Mitä seuraavaksi?}
+    Seuraavaksi käytän toimivaa FFT:tä 2D FFT:n implementoimiseen, tässä voidaan hyödyntää Fourier muunnoksen separoituvuutta: suoritetaan 1D FFT ensin kuvan riveille ja sitten sarakkeille. Mahdollisesti pääsen itse Filtered Back Projectionin kimppuun myös, ellei suuria yllätyksiä tule.
+    Yritän myös saada Doxygenin toimimaan mahdollisimman nopeasti, jotta viitsisin aloittaa järkevän koodin dokumentoimisen. Nyt olen pyrkinyt halkomaan koodin mahdollisimman pieniin palasiin ja nimeämään funktiot selkeästi.
+     
+\end{document}
