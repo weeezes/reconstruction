@@ -10,6 +10,7 @@ class ComplexArray {
 
 public:
     ComplexArray(int size);
+    ComplexArray(std::complex<double>* array, int size);
     ComplexArray(const ComplexArray& other);
     ~ComplexArray();
 
@@ -20,7 +21,9 @@ public:
     ComplexArray slice(int start, int stop) const;
 
     std::complex<double>& operator[] (const int index);
+    ComplexArray operator*(const std::complex<double> v);
     ComplexArray& operator=(const ComplexArray& other);
+    ComplexArray operator-(const ComplexArray& other);
 
 private:
     std::complex<double>* array;

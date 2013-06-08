@@ -24,44 +24,26 @@ int main(int argc, char* argv[]) {
     
     std::cout << "Image: " << std::endl;
 
-    for (int y=0; y<img.getHeight(); y++)
-    {
-        for (int x=0; x<img.getWidth(); x++)
-        {
-            std::cout << img.getPixelValue(x,y) << " ";
-        }
-        std::cout << std::endl;
-    }
- 
     img.upscaleToClosestPowerOfTwo();
 
     std::complex<double>* data = img.getData().toArray();
 
     algorithms::fft2D(data, img.getWidth());
-    
-    std::cout << "Transformed image: " << std::endl;
-
-    for (int y=0; y<img.getHeight(); y++)
-    {
-        for (int x=0; x<img.getWidth(); x++)
-        {
-            std::cout << std::abs(data[y*img.getWidth()+x]) << " ";
-        }
-        std::cout << std::endl;
-    }
 
     algorithms::ifft2D(data, img.getWidth());
     
-    std::cout << "Inverse transformed image: " << std::endl;
+    ComplexArray d(data, img.getWidth()*img.getWidth());
+    Image filtered(d, img.getWidth(), img.getHeight());
 
-    for (int y=0; y<img.getHeight(); y++)
-    {
-        for (int x=0; x<img.getWidth(); x++)
-        {
-            std::cout << std::abs(data[y*img.getWidth()+x]) << " ";
-        }
-        std::cout << std::endl;
-    }
+    int sx = (img.getWidth()-x_size)/2;
+    int sy = (img.getHeight()-y_size)/2;
+    Image slice = utils::sliceImage(filtered, sx, sy, x_size, y_size);
+
+   // Image transformed = algorithms::inverse_radon(slice, 0, 20, 10);
+    Image transformed = slice;
+    std::cout << "Width: " << transformed.getWidth() << std::endl << "Height: " << transformed.getHeight() << std::endl;
+    std::cout << "Data points: " << transformed.getData().getSize() << std::endl; 
+    utils::saveFile("transformed.raw", transformed.getData());
 
     return 0;
 }

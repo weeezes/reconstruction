@@ -1,0 +1,46 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8x]{inputenc}
+\usepackage{ucs}
+\usepackage[finnish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[figurename=Kuva, tablename=Taulukko]{caption}
+
+\author{Vesa Hagström}
+
+\begin{document}
+    \renewcommand{\bibname}{Viitteet}
+
+	\begin{titlepage}
+    \label{Title}
+	\begin{flushleft}
+		\hfill Vesa Hagström 											\\
+		\hfill \texttt{vesa.hagstrom@helsinki.fi} 						\\
+		\hfill Op.Nro: 013865575											\\
+		\hfill Tiralabra harjoitustyö									\\
+		\hfill 8.6.2013													\\
+	\end{flushleft}
+
+	\vfill
+
+	\begin{center}
+		\huge{4. Viikkoraportti}
+	\end{center}
+
+	\vfill
+
+	\end{titlepage}
+
+    \section*{Selvitys}
+    Neljännellä viikolla en tehnyt mitään. 7. ja 8. päivä yritin saada tiedostoon kirjoittamisen toimimaan, ja 8. päivä jopa onnistuin saamaan jotakin tallennettua. 
+    Onnistun joillakin tyypeillä lukemaan kuvan tiedostosta, Fourier-muuntamaan kuvan, kääntesmuuntamaan sen takaisin ja kirjoittamaan tuloksen kuvatiedostoksi hyvin tuloksin. Ilmeisesti näiden tyyppien arvoalue ei kuitenkaan jostakin syystä riitä itse Radon-muunnoksen käänteismuunnoksen tallentamiseen, vaikka en oleta tuloksessa olevan massiivisia arvoja. Selvästi sekä Radon-käänteismuunnokseni että arvojen tyyppimuunnokset ovat rikki. 
+    Kaikkea koodia ei ole testattu eikä kommentoitu, jätän tämän tehtäväksi - piru minut periköön - seuraavalle viikolle, ja saada tämän viikon edes jotenkuten pakettiin.  
+    
+    \section*{Mitä seuraavaksi?}
+    Seuraavaksi olisi syytä saada selvitettyä kuinka data tallennetaan tiedostoon niin, että mikään ei hajoa matkalla. Intresseihini kuuluu myös saada itse Radon-käänteismuunnos valmiiksi. Minulla on kumpaankin jonkinlainen runko aluilla, ongelmaksi koituu kuitenkin se, että kun toinen on hajalla niin on hankalaa todentaa toisen toimivan. En keksi tapaa varmistaa Radon-käänteismuunnoksen toimivuutta muuta kuin silmämääräisesti tarkistamalla lopputuloksen.    
+     
+\end{document}

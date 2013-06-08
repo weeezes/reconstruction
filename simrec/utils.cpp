@@ -20,7 +20,7 @@ ComplexArray utils::readFile(const char* filename, const int expectedBytes)
 			stream.close();
 
 			for (int i=0; i<size; i++)
-				data[i] = std::polar(raw[i]*1.0, 0.0);
+				data[i] = std::complex<double>(raw[i]*1.0, 0.0);
 
 			delete[] raw;
 
@@ -35,6 +35,32 @@ ComplexArray utils::readFile(const char* filename, const int expectedBytes)
 	{
 		throw "Can't read the file!";
 	}
+}
+
+void utils::saveFile(const char* filename, const ComplexArray& data)
+{
+	std::ofstream stream(filename, std::ios::out | std::ios::binary);
+
+    if (stream.is_open())
+    {   
+
+        std::cout << "Writing out " << data.getSize() << " points." << std::endl;
+
+        for (int i=0; i<data.getSize(); i++)
+        {
+            float v = (float) ( std::abs(data.get(i)) );
+
+            stream.write((char*)( &v ), sizeof(v));
+        }
+        if (!stream.fail())
+            std::cout << "File saved." << std::endl;
+    }
+    else
+    {
+        throw "Can't read the file!";
+    }
+
+    stream.close();
 }
 
 /// Transposes the given array
@@ -77,6 +103,29 @@ std::complex<double>* utils::sliceArray(std::complex<double>* array, unsigned in
     std::complex<double>* slice = utils::initNewComplexArray(stop-start);
     for (int i=start, k=0; i<stop; i++, k++)
         slice[k] = array[i];
+
+    return slice;
+}
+
+Image utils::sliceImage(Image image, unsigned int startX, unsigned int startY, unsigned int width, unsigned int height)
+{
+    if (startX > image.getWidth() || startX+width > image.getWidth())
+        throw "Slice doesn't fit inside of the original image in the x-dimension!";
+    if (startY > image.getHeight() || startY+height > image.getHeight())
+        throw "Slice doesn't fit inside of the original image in the y-dimension!";
+
+    ComplexArray sliceData(width*height);
+    ComplexArray imageData = image.getData();
+
+    for (int y=0; y<height; y++)
+    {
+        for (int x=0; x<width; x++)
+        {
+            sliceData[y*width+x] = imageData[(startY+y)*image.getWidth()+(startX+x)];
+        }
+    }
+
+    Image slice(sliceData, width, height);
 
     return slice;
 }

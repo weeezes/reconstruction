@@ -14,6 +14,12 @@ ComplexArray::ComplexArray(const ComplexArray& other)
     this->array = other.toArray();
 }
 
+ComplexArray::ComplexArray(std::complex<double>* array, int size)
+{
+    this->size = size;
+    this->array = array;
+}
+
 ComplexArray::~ComplexArray()
 {
     delete[] this->array;
@@ -38,11 +44,11 @@ std::complex<double> ComplexArray::get(int index) const
  */
 std::complex<double>* ComplexArray::toArray() const
 {
-    std::complex<double>* copy = new std::complex<double>[this->size];
-    for (int i=0; i<this->size; i++)
-        copy[i] = this->array[i];
-        
-    return copy;
+   std::complex<double>* copy = new std::complex<double>[this->size];
+   for (int i=0; i<this->size; i++)
+       copy[i] = this->get(i);
+       
+   return copy;
 }
 
 /// Slices a part of the array
@@ -81,6 +87,31 @@ std::complex<double>& ComplexArray::operator[](const int index)
         throw "Index out of range!";
 
     return this->array[index];
+}
+
+ComplexArray ComplexArray::operator*(const std::complex<double> v)
+{
+    ComplexArray mult(this->size);
+
+    for (int i=0; i < this->size; i++)
+    {
+        mult[i] = this->array[i]*v;
+    }
+
+    return mult;
+}
+
+ComplexArray ComplexArray::operator-(const ComplexArray& other)
+{
+    if (other.getSize() != this->size)
+        throw "Subtracted arrays must be of the same size!";
+
+    ComplexArray sub(this->size);
+
+    for (int i=0; i < this->size; i++)
+        sub[i] = this->get(i) - other.get(i);
+
+    return sub;
 }
 
 ComplexArray& ComplexArray::operator=(const ComplexArray& other)

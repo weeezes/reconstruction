@@ -2,8 +2,11 @@
 #define ALGORITHMS_H
 
 #include <complex>
+#include <cmath>
+#include <iostream>
 
 #include "utils.hpp"
+#include "image.hpp"
 
 namespace simrec {
 
@@ -16,6 +19,7 @@ namespace simrec {
         void ifft(std::complex<double>* data, unsigned int length);
 	    void ifft2D(std::complex<double>* data, unsigned int sideLength);
 
+        Image inverse_radon(Image input, float angleStart, float angleStop, float angleStep);        
     }
 
 }

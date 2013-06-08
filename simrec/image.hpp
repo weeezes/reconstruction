@@ -19,6 +19,7 @@ namespace simrec {
 class Image {
 public:
     Image(ComplexArray data, int width, int height);
+    Image(const Image& other);
 
     int getWidth() const;
     int getHeight() const;
@@ -26,16 +27,13 @@ public:
     int getPixelValue(int x, int y) const;
     
     void upscaleToClosestPowerOfTwo();
-    ComplexArray getData();
+    ComplexArray getData() const;
 
 private:
     ComplexArray imageData;
     int width;
     int height;
     int size;
-
-    // deny copying of the object
-    Image(const Image& other);
 
     int findNewSideLength();
     void copyCurrentDataTo(ComplexArray& newArray, int newSide,int startX, int startY);

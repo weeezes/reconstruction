@@ -128,3 +128,30 @@ void algorithms::ifft2D(std::complex<double>* data, unsigned int sideLength)
             data[i] = data[i]/std::complex<double>(sideLength, 0.0);
     }
 }
+
+Image algorithms::inverse_radon(Image input, float angleStart, float angleStop, float angleStep)
+{
+    // estimate output width
+    int outputWidth = 2*std::floor(input.getWidth()/(2*std::sqrt(2)));
+
+    ComplexArray transformedData(outputWidth*outputWidth);
+    ComplexArray inputData = input.getData();
+
+    int midIndex = (int) (input.getHeight()/2 + 0.5);
+    for (int y=0; y<outputWidth; y++)
+    {
+        for (int x=0; x<outputWidth; x++)
+        {
+            for (int k=angleStart; k<angleStop; k+=angleStep)
+            {
+                int t = (int)(x*std::sin(k) + y*std::cos(k));
+                if (t > 0 && t < input.getHeight())
+                    transformedData[y*outputWidth+x] += inputData[k+ t*input.getWidth()];
+            }
+        }
+    }
+
+    Image transformed(transformedData, outputWidth, outputWidth);
+
+    return transformed;
+}

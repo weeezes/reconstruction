@@ -20,6 +20,15 @@ Image::Image(ComplexArray data, int width, int height)
             this->height = height;
 }
 
+Image::Image(const Image& other)
+    : imageData(0)
+{
+    this->imageData = other.getData();
+    this->width = other.getWidth();
+    this->height = other.getHeight();
+    this->size = other.getSize();
+}
+
 int Image::getWidth() const
 {
     return width;
@@ -81,9 +90,9 @@ void Image::upscaleToClosestPowerOfTwo()
     this->height = newSide;
 }
 
-ComplexArray Image::getData()
+ComplexArray Image::getData() const
 {
-    return imageData;
+    return this->imageData;
 }
 
 /**
