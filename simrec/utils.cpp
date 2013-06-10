@@ -48,7 +48,7 @@ void utils::saveFile(const char* filename, const ComplexArray& data)
 
         for (int i=0; i<data.getSize(); i++)
         {
-            float v = (float) ( std::abs(data.get(i)) );
+            float v = static_cast<float> ( std::abs(data.get(i)) );
 
             stream.write((char*)( &v ), sizeof(v));
         }
@@ -159,4 +159,9 @@ bool utils::isAPowerOfTwo(unsigned int number)
     // true case: 100 & ( 100 - 1 ) -> 100 & 011 = 0 == 0
     // false case: 011 & ( 011 - 1 ) -> 011 & 010 = 010 != 0
     return (number & (number-1)) == 0;
+}
+
+double utils::toRadians(double degrees)
+{
+    return degrees*PI/180.0;
 }

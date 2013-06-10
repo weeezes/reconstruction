@@ -24,6 +24,9 @@ namespace simrec {
         
         bool isAPowerOfTwo(unsigned int number);
 
+        double toRadians(double degrees);
+        
+        double const PI = 3.14159265;
     }
 }
 
