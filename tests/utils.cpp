@@ -27,26 +27,24 @@ BOOST_AUTO_TEST_CASE( read_file ) {
 BOOST_AUTO_TEST_CASE( init_complex_array )
 {
     int size = 4;
-    std::complex<double>* array = utils::initNewComplexArray(size);
+    ComplexArray array(size);
     for (int i=0; i<size; i++)
     {
         BOOST_CHECK_EQUAL(array[i], std::polar(0.0, 0.0));
     }
-
-    delete[] array;
 }
 
 BOOST_AUTO_TEST_CASE( split_complex_array )
 {
     int size = 4;
-    std::complex<double>* array = utils::initNewComplexArray(size);
+    ComplexArray array(size);
     for (int i=0; i<size; i++)
     {
         array[i] = std::polar(i*1.0, 0.0);
     }
 
-    std::complex<double>* even = utils::initNewComplexArray(2);
-    std::complex<double>* odd = utils::initNewComplexArray(2);
+    ComplexArray even(2);
+    ComplexArray odd(2);
 
     utils::splitArrayToEvenAndOdd(array, size, odd, even);
 
@@ -54,16 +52,12 @@ BOOST_AUTO_TEST_CASE( split_complex_array )
     BOOST_CHECK_EQUAL(even[1], std::polar(2.0, 0.0));
     BOOST_CHECK_EQUAL(odd[0], std::polar(1.0, 0.0));
     BOOST_CHECK_EQUAL(odd[1], std::polar(3.0, 0.0));
-    
-    delete[] array;
-    delete[] even;
-    delete[] odd;
 }
 
 BOOST_AUTO_TEST_CASE( flip_complex_array )
 {
 	int sideLength = 8;
-    std::complex<double>* array = utils::initNewComplexArray(sideLength*sideLength);
+    ComplexArray array(sideLength*sideLength);
     
     for (int i=0; i<sideLength*sideLength; i++)
         array[i] = std::complex<double>(i*1.0, 0.0);
@@ -89,8 +83,6 @@ BOOST_AUTO_TEST_CASE( flip_complex_array )
     BOOST_CHECK_EQUAL(array[7], std::complex<double>(7.0, 0.0));
     BOOST_CHECK_EQUAL(array[56], std::complex<double>(56.0, 0.0));
     BOOST_CHECK_EQUAL(array[sideLength*sideLength-1], std::complex<double>(63.0, 0.0));
-
-    delete[] array;
 }
 
 BOOST_AUTO_TEST_SUITE_END()

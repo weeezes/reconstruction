@@ -26,20 +26,21 @@ int main(int argc, char* argv[]) {
 
     img.upscaleToClosestPowerOfTwo();
 
-    std::complex<double>* data = img.getData().toArray();
+    ComplexArray data = img.getData();
 
+	//Filter the data and ifft it back
     algorithms::fft2D(data, img.getWidth());
-
+	algorithms::lowPassFilter(data, img.getWidth(), img.getHeight(), 0.80);
+	algorithms::rampFilter(data, img.getWidth(), img.getHeight(), 10.0);
     algorithms::ifft2D(data, img.getWidth());
     
-    ComplexArray d(data, img.getWidth()*img.getWidth());
-    Image filtered(d, img.getWidth(), img.getHeight());
+    Image filtered(data, img.getWidth(), img.getHeight());
 
-    int sx = (img.getWidth()-x_size)/2;
-    //int sy = (img.getHeight()-y_size)/2;
-    //Image slice = utils::sliceImage(filtered, sx, sy, x_size, y_size);
+	int sx = (img.getWidth()-x_size)/2.0;
+	int sy = (img.getHeight()-y_size)/2.0;
+	Image slice = utils::sliceImage(filtered, sx, sy, x_size, y_size);
 
-    Image transformed = algorithms::inverse_radon(filtered, sx, sx+200, 1);
+    Image transformed = algorithms::inverse_radon(slice, 0, x_size, 1);
 //    Image transformed = slice;
     std::cout << "Width: " << transformed.getWidth() << std::endl << "Height: " << transformed.getHeight() << std::endl;
     std::cout << "Data points: " << transformed.getData().getSize() << std::endl; 

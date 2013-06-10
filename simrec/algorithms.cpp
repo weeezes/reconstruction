@@ -8,7 +8,7 @@ using namespace simrec;
 * @param data input data to transform
 * @param length length of the data, must be a value that is a power of two.
 */
-void algorithms::fft(std::complex<double>* data, unsigned int length)
+void algorithms::fft(ComplexArray& data, int i, unsigned int length)
 {
     if (length == 1)
         return;
@@ -16,13 +16,13 @@ void algorithms::fft(std::complex<double>* data, unsigned int length)
     if (!utils::isAPowerOfTwo(length))
         throw "Not a power of two!";
 
-    std::complex<double>* even = utils::initNewComplexArray(length/2);
-    std::complex<double>* odd = utils::initNewComplexArray(length/2);
+    ComplexArray even(length/2);
+    ComplexArray odd(length/2);
 
     utils::splitArrayToEvenAndOdd(data, length, odd, even);
 
-    algorithms::fft(even, length/2);
-    algorithms::fft(odd, length/2);
+    algorithms::fft(even, 0, length/2);
+    algorithms::fft(odd, 0, length/2);
 
     for (int k=0; k<=length/2-1; k++)
     {
@@ -30,8 +30,6 @@ void algorithms::fft(std::complex<double>* data, unsigned int length)
         data[k+length/2] = even[k] - odd[k]*std::polar(1.0, -2*3.14*k/length);
     }
     
-    delete[] even;
-    delete[] odd;
 }
 
 /// Fast Fourier Transform in two dimensions, based on the Cooley-Tukey algorithm
@@ -41,21 +39,31 @@ void algorithms::fft(std::complex<double>* data, unsigned int length)
 * @param sideLength the sides length of the rectangular data. Must be a value that
 * is a power of two
 */
-void algorithms::fft2D(std::complex<double>* data, unsigned int sideLength)
+void algorithms::fft2D(ComplexArray& data, unsigned int sideLength)
 {
     if (!utils::isAPowerOfTwo(sideLength))
         throw "Not a power of two!";
 
     for (int y=0; y<sideLength; y++)
     { 
-        algorithms::fft(&data[y*sideLength], sideLength);
+		ComplexArray slice = data.slice(y*sideLength, y*sideLength+sideLength-1);
+        algorithms::fft(slice, 0, sideLength);
+		for (int i=0; i<sideLength; i++)
+		{
+			data[y*sideLength+i] = slice[i];
+		}
     }
 
     utils::flip2DArray(data, sideLength);
 
     for (int y=0; y<sideLength; y++)
     { 
-        algorithms::fft(&data[y*sideLength], sideLength);
+		ComplexArray slice = data.slice(y*sideLength, y*sideLength+sideLength-1);
+        algorithms::fft(slice, 0, sideLength);
+		for (int i=0; i<sideLength; i++)
+		{
+			data[y*sideLength+i] = slice[i];
+		}
     }
 
     utils::flip2DArray(data, sideLength);
@@ -67,7 +75,7 @@ void algorithms::fft2D(std::complex<double>* data, unsigned int sideLength)
 * @param data input data to transform
 * @param length length of the data, must be a value that is a power of two.
 */
-void algorithms::ifft(std::complex<double>* data, unsigned int length)
+void algorithms::ifft(ComplexArray& data, int i, unsigned int length)
 {
     if (length == 1)
         return;
@@ -75,22 +83,19 @@ void algorithms::ifft(std::complex<double>* data, unsigned int length)
     if (!utils::isAPowerOfTwo(length))
         throw "Not a power of two!";
 
-    std::complex<double>* even = utils::initNewComplexArray(length/2);
-    std::complex<double>* odd = utils::initNewComplexArray(length/2);
+    ComplexArray even(length/2);
+    ComplexArray odd(length/2);
 
     utils::splitArrayToEvenAndOdd(data, length, odd, even);
 
-    algorithms::ifft(even, length/2);
-    algorithms::ifft(odd, length/2);
+    algorithms::ifft(even, 0, length/2);
+    algorithms::ifft(odd, 0, length/2);
 
     for (int k=0; k<=length/2-1; k++)
     {
         data[k] = even[k] + odd[k]*std::polar(1.0, 2*utils::PI*k/length);
         data[k+length/2] = even[k] - odd[k]*std::polar(1.0, 2*utils::PI*k/length);
     }
-    
-    delete[] even;
-    delete[] odd;
 }
 
 /// Inverse Fast Fourier Transform in two dimensions, based on the Cooley-Tukey algorithm
@@ -100,36 +105,46 @@ void algorithms::ifft(std::complex<double>* data, unsigned int length)
 * @param sideLength the sides length of the rectangular data. Must be a value that
 * is a power of two
 */
-void algorithms::ifft2D(std::complex<double>* data, unsigned int sideLength)
+void algorithms::ifft2D(ComplexArray& data, unsigned int sideLength)
 {
     if (!utils::isAPowerOfTwo(sideLength))
         throw "Not a power of two!";
 
-    utils::flip2DArray(data, sideLength);
 
     for (int y=0; y<sideLength; y++)
     { 
-        algorithms::ifft(&data[y*sideLength], sideLength);
-
-        // normalization
-        for (int i=y*sideLength; i<y*sideLength+sideLength; i++)
-            data[i] = data[i]/std::complex<double>(sideLength, 0.0);
-    }
+		ComplexArray slice = data.slice(y*sideLength, y*sideLength+sideLength-1);
+        algorithms::ifft(slice, 0, sideLength);
+		for (int i=0; i<sideLength; i++)
+		{
+			data[y*sideLength+i] = slice[i];
+		}
         
+		// normalization
+        for (int i=y*sideLength; i<y*sideLength+sideLength; i++)
+            data[i] = data[i]/std::complex<double>(sideLength, 0.0);
+    }
 
     utils::flip2DArray(data, sideLength);
 
     for (int y=0; y<sideLength; y++)
     { 
-        algorithms::ifft(&data[y*sideLength], sideLength);
+		ComplexArray slice = data.slice(y*sideLength, y*sideLength+sideLength-1);
+        algorithms::ifft(slice, 0, sideLength);
+		for (int i=0; i<sideLength; i++)
+		{
+			data[y*sideLength+i] = slice[i];
+		}
 
         // normalization
         for (int i=y*sideLength; i<y*sideLength+sideLength; i++)
             data[i] = data[i]/std::complex<double>(sideLength, 0.0);
     }
+
+    utils::flip2DArray(data, sideLength);
 }
 
-Image algorithms::inverse_radon(Image input, float angleStart, float angleStop, float angleStep)
+Image algorithms::inverse_radon(Image input, int angleStart, int angleStop, int angleStep)
 {
     // estimate output width
     int outputWidth = 2*std::floor(input.getHeight()/(2*std::sqrt(2)));
@@ -137,8 +152,9 @@ Image algorithms::inverse_radon(Image input, float angleStart, float angleStop, 
     ComplexArray transformedData(outputWidth*outputWidth);
     ComplexArray inputData = input.getData();
 
-    int inputMidIndex = (int) (input.getHeight()/2.0 + 0.5);
-    int outputMidIndex = (int) (outputWidth/2.0+0.5);
+    int inputMidIndex = (int) ( input.getHeight() / 2.0 + 0.5 );
+    int outputMidIndex = (int) ( outputWidth / 2.0 + 0.5);
+
     for (int y=0; y<outputWidth; y++)
     {
         for (int x=0; x<outputWidth; x++)
@@ -147,7 +163,7 @@ Image algorithms::inverse_radon(Image input, float angleStart, float angleStop, 
             {
                 double rad = utils::toRadians(k);
                 int t = (int)( inputMidIndex + ( x - outputMidIndex )*std::sin(rad) + ( y - outputMidIndex )*std::cos(rad));
-                if (t > 0 && t < input.getHeight())
+                if (t >= 0 && t < input.getHeight())
                     transformedData[y*outputWidth+x] += inputData[k + t*input.getWidth()];
             }
         }
@@ -156,4 +172,36 @@ Image algorithms::inverse_radon(Image input, float angleStart, float angleStop, 
     Image transformed(transformedData, outputWidth, outputWidth);
 
     return transformed;
+}
+
+void algorithms::rampFilter(ComplexArray& data, int width, int height, double slope)
+{
+	for (int y=0; y<height; y++)
+	{
+		for (int x=0; x<width; x++)
+		{
+			int dy = y-height/2;
+			int dx = x-width/2;
+			double r = std::sqrt(dy*dy+dx*dx);
+			data[y*width+x] = data[y*width+x]*std::complex<double>(r*slope, r*slope);
+		}
+	}
+}
+
+void algorithms::lowPassFilter(ComplexArray& data, int width, int height, double cutoff_percentage)
+{
+	double max_r = std::sqrt(width*width/4+height*height/4);
+	double cutoff_r = max_r*cutoff_percentage;
+
+	for (int y=0; y<height; y++)
+	{
+		for (int x=0; x<width; x++)
+		{
+			int dy = y-height/2;
+			int dx = x-width/2;
+			double r = std::sqrt(dy*dy+dx*dx);
+			if (r < cutoff_r)
+				data[y*width+x] = std::complex<double>(0.0, 0.0);
+		}
+	}
 }

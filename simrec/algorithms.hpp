@@ -13,13 +13,15 @@ namespace simrec {
 	/// Namespace that contains all the programs algorithms
     namespace algorithms {
         
-        void fft(std::complex<double>* data, unsigned int length);
-	    void fft2D(std::complex<double>* data, unsigned int sideLength);
+        void fft(ComplexArray& data, int i, unsigned int length);
+	    void fft2D(ComplexArray& data, unsigned int sideLength);
 
-        void ifft(std::complex<double>* data, unsigned int length);
-	    void ifft2D(std::complex<double>* data, unsigned int sideLength);
+        void ifft(ComplexArray& data, int i, unsigned int length);
+	    void ifft2D(ComplexArray& data, unsigned int sideLength);
 
-        Image inverse_radon(Image input, float angleStart, float angleStop, float angleStep);        
+        Image inverse_radon(Image input, int angleStart, int angleStop, int angleStep);        
+		void rampFilter(ComplexArray& data, int width, int height, double slope);
+		void lowPassFilter(ComplexArray& data, int width, int height, double slope);
     }
 
 }
