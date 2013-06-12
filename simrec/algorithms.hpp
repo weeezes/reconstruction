@@ -19,7 +19,8 @@ namespace simrec {
         void ifft(ComplexArray& data, int i, unsigned int length);
 	    void ifft2D(ComplexArray& data, unsigned int sideLength);
 
-        Image inverse_radon(Image input, int angleStart, int angleStop, int angleStep);        
+        Image inverse_radon(Image input, int angleStart, int angleStop, int angleStep);   
+
 		void rampFilter(ComplexArray& data, int width, int height, double slope);
 		void lowPassFilter(ComplexArray& data, int width, int height, double slope);
     }
