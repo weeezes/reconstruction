@@ -1,0 +1,120 @@
+\hypertarget{classsimrec_1_1ComplexArray}{\section{simrec\-:\-:\-Complex\-Array \-Class \-Reference}
+\label{classsimrec_1_1ComplexArray}\index{simrec\-::\-Complex\-Array@{simrec\-::\-Complex\-Array}}
+}
+
+
+\-An array with a fixed size containing complex values.  
+
+
+
+
+{\ttfamily \#include $<$complex\-\_\-array.\-hpp$>$}
+
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classsimrec_1_1ComplexArray_a86e1e6f77ebe1fec2da3e49c8a698f51}{\hyperlink{classsimrec_1_1ComplexArray_a86e1e6f77ebe1fec2da3e49c8a698f51}{\-Complex\-Array} (int size)}\label{classsimrec_1_1ComplexArray_a86e1e6f77ebe1fec2da3e49c8a698f51}
+
+\begin{DoxyCompactList}\small\item\em \-Default constructor. \end{DoxyCompactList}\item 
+\hypertarget{classsimrec_1_1ComplexArray_aa0036df89c3b0235c5749560861436c0}{\hyperlink{classsimrec_1_1ComplexArray_aa0036df89c3b0235c5749560861436c0}{\-Complex\-Array} (std\-::complex$<$ double $>$ $\ast$array, int size)}\label{classsimrec_1_1ComplexArray_aa0036df89c3b0235c5749560861436c0}
+
+\begin{DoxyCompactList}\small\item\em \-Initialize a \hyperlink{classsimrec_1_1ComplexArray}{\-Complex\-Array} from a raw std\-::complex$<$double$>$$\ast$ array. \end{DoxyCompactList}\item 
+\hypertarget{classsimrec_1_1ComplexArray_a9d465502f2fb5f1e60e174199115993c}{\hyperlink{classsimrec_1_1ComplexArray_a9d465502f2fb5f1e60e174199115993c}{\-Complex\-Array} (const \hyperlink{classsimrec_1_1ComplexArray}{\-Complex\-Array} \&other)}\label{classsimrec_1_1ComplexArray_a9d465502f2fb5f1e60e174199115993c}
+
+\begin{DoxyCompactList}\small\item\em \-Copy constructor. \end{DoxyCompactList}\item 
+\hypertarget{classsimrec_1_1ComplexArray_ab43d4afa961ad46b074d93941ca2a97f}{\hyperlink{classsimrec_1_1ComplexArray_ab43d4afa961ad46b074d93941ca2a97f}{$\sim$\-Complex\-Array} ()}\label{classsimrec_1_1ComplexArray_ab43d4afa961ad46b074d93941ca2a97f}
+
+\begin{DoxyCompactList}\small\item\em \-Destructor. \end{DoxyCompactList}\item 
+\hypertarget{classsimrec_1_1ComplexArray_a4e0da805cc6fe7a5327489dd57bc2666}{int \hyperlink{classsimrec_1_1ComplexArray_a4e0da805cc6fe7a5327489dd57bc2666}{get\-Size} () const }\label{classsimrec_1_1ComplexArray_a4e0da805cc6fe7a5327489dd57bc2666}
+
+\begin{DoxyCompactList}\small\item\em \-Returns the size of the array. \end{DoxyCompactList}\item 
+\hypertarget{classsimrec_1_1ComplexArray_af89be28dd5bb1b90e16b5a5f25641b8e}{std\-::complex$<$ double $>$ \hyperlink{classsimrec_1_1ComplexArray_af89be28dd5bb1b90e16b5a5f25641b8e}{get} (int index) const }\label{classsimrec_1_1ComplexArray_af89be28dd5bb1b90e16b5a5f25641b8e}
+
+\begin{DoxyCompactList}\small\item\em \-Returns a value that can't change the value inside of the array. \end{DoxyCompactList}\item 
+std\-::complex$<$ double $>$ $\ast$ \hyperlink{classsimrec_1_1ComplexArray_a6cbd3be386f9ac82b88c13807711e747}{to\-Array} () const 
+\begin{DoxyCompactList}\small\item\em \-Generates a raw array copy from the object. \end{DoxyCompactList}\item 
+\hyperlink{classsimrec_1_1ComplexArray}{\-Complex\-Array} \hyperlink{classsimrec_1_1ComplexArray_a636720d1fbf2dc9d4ccfb2518360d1f1}{slice} (int start, int stop) const 
+\begin{DoxyCompactList}\small\item\em \-Slices a part of the array. \end{DoxyCompactList}\item 
+void \hyperlink{classsimrec_1_1ComplexArray_a3602250031c1100b2499b32c20e75bbe}{replace\-Region\-With} (\hyperlink{classsimrec_1_1ComplexArray}{\-Complex\-Array} \&replacement, int region\-Start)
+\begin{DoxyCompactList}\small\item\em \-Replace a region of the \hyperlink{classsimrec_1_1ComplexArray}{\-Complex\-Array} with another \hyperlink{classsimrec_1_1ComplexArray}{\-Complex\-Array}. \end{DoxyCompactList}\item 
+\hypertarget{classsimrec_1_1ComplexArray_a8be48a6c1a7ed53c705be8e55b6cb37a}{std\-::complex$<$ double $>$ \& {\bfseries operator\mbox{[}$\,$\mbox{]}} (const int index)}\label{classsimrec_1_1ComplexArray_a8be48a6c1a7ed53c705be8e55b6cb37a}
+
+\item 
+\hypertarget{classsimrec_1_1ComplexArray_a94f0d0f7b1e9780a81129dd286dfa65b}{\hyperlink{classsimrec_1_1ComplexArray}{\-Complex\-Array} {\bfseries operator$\ast$} (const std\-::complex$<$ double $>$ v)}\label{classsimrec_1_1ComplexArray_a94f0d0f7b1e9780a81129dd286dfa65b}
+
+\item 
+\hypertarget{classsimrec_1_1ComplexArray_af0426e020d99c7d1ba3c98a6505c2e89}{\hyperlink{classsimrec_1_1ComplexArray}{\-Complex\-Array} \& {\bfseries operator=} (const \hyperlink{classsimrec_1_1ComplexArray}{\-Complex\-Array} \&other)}\label{classsimrec_1_1ComplexArray_af0426e020d99c7d1ba3c98a6505c2e89}
+
+\item 
+\hypertarget{classsimrec_1_1ComplexArray_aa828530756012a65a3b23dc8de68d820}{\hyperlink{classsimrec_1_1ComplexArray}{\-Complex\-Array} {\bfseries operator-\/} (const \hyperlink{classsimrec_1_1ComplexArray}{\-Complex\-Array} \&other)}\label{classsimrec_1_1ComplexArray_aa828530756012a65a3b23dc8de68d820}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-An array with a fixed size containing complex values. 
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classsimrec_1_1ComplexArray_a3602250031c1100b2499b32c20e75bbe}{\index{simrec\-::\-Complex\-Array@{simrec\-::\-Complex\-Array}!replace\-Region\-With@{replace\-Region\-With}}
+\index{replace\-Region\-With@{replace\-Region\-With}!simrec::ComplexArray@{simrec\-::\-Complex\-Array}}
+\subsubsection[{replace\-Region\-With}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Complex\-Array\-::replace\-Region\-With} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Complex\-Array} \&}]{replacement, }
+\item[{int}]{region\-Start}
+\end{DoxyParamCaption}
+)}}\label{classsimrec_1_1ComplexArray_a3602250031c1100b2499b32c20e75bbe}
+
+
+\-Replace a region of the \hyperlink{classsimrec_1_1ComplexArray}{\-Complex\-Array} with another \hyperlink{classsimrec_1_1ComplexArray}{\-Complex\-Array}. 
+
+\-Replaces a region of the \hyperlink{classsimrec_1_1ComplexArray}{\-Complex\-Array} with a smaller replacement \hyperlink{classsimrec_1_1ComplexArray}{\-Complex\-Array}, starting from a given index. 
+\begin{DoxyParams}{\-Parameters}
+{\em replacement} & the replacement \hyperlink{classsimrec_1_1ComplexArray}{\-Complex\-Array}. \-Must fit into the other \hyperlink{classsimrec_1_1ComplexArray}{\-Complex\-Array} so that replacement.\-get\-Size()+region\-Start -\/ 1 $<$ the size of this \hyperlink{classsimrec_1_1ComplexArray}{\-Complex\-Array} \\
+\hline
+{\em region\-Start} & the index where to start the replacing \\
+\hline
+\end{DoxyParams}
+\hypertarget{classsimrec_1_1ComplexArray_a636720d1fbf2dc9d4ccfb2518360d1f1}{\index{simrec\-::\-Complex\-Array@{simrec\-::\-Complex\-Array}!slice@{slice}}
+\index{slice@{slice}!simrec::ComplexArray@{simrec\-::\-Complex\-Array}}
+\subsubsection[{slice}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Complex\-Array} {\bf \-Complex\-Array\-::slice} (
+\begin{DoxyParamCaption}
+\item[{int}]{start, }
+\item[{int}]{stop}
+\end{DoxyParamCaption}
+) const}}\label{classsimrec_1_1ComplexArray_a636720d1fbf2dc9d4ccfb2518360d1f1}
+
+
+\-Slices a part of the array. 
+
+\-Creates a slice from the array from the index defined by start to the index defined by stop. \-Stop must be a value larger than start, and both indices must be inside the limit \mbox{[}0, size-\/1\mbox{]}
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em start} & the index where to start slicing \\
+\hline
+{\em stop} & the index where to stop slicing \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+a slice from the original array 
+\end{DoxyReturn}
+\hypertarget{classsimrec_1_1ComplexArray_a6cbd3be386f9ac82b88c13807711e747}{\index{simrec\-::\-Complex\-Array@{simrec\-::\-Complex\-Array}!to\-Array@{to\-Array}}
+\index{to\-Array@{to\-Array}!simrec::ComplexArray@{simrec\-::\-Complex\-Array}}
+\subsubsection[{to\-Array}]{\setlength{\rightskip}{0pt plus 5cm}std\-::complex$<$ double $>$ $\ast$ {\bf \-Complex\-Array\-::to\-Array} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{classsimrec_1_1ComplexArray_a6cbd3be386f9ac82b88c13807711e747}
+
+
+\-Generates a raw array copy from the object. 
+
+\begin{DoxyReturn}{\-Returns}
+an array of the type std\-::complex$<$double$>$ 
+\end{DoxyReturn}
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+simrec/complex\-\_\-array.\-hpp\item 
+simrec/complex\-\_\-array.\-cpp\end{DoxyCompactItemize}

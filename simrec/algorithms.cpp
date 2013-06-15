@@ -32,6 +32,7 @@ void algorithms::fft(ComplexArray& data, unsigned int length)
     
 }
 
+///Take FFT of the data row by row
 void algorithms::fftRowsOf(ComplexArray& data, unsigned int sideLength)
 {
     for (int y=0; y<sideLength; y++)
@@ -94,6 +95,7 @@ void algorithms::ifft(ComplexArray& data, unsigned int length)
     }
 }
 
+///Take the iFFT of the data row by row
 void algorithms::ifftRowsOf(ComplexArray& data, unsigned int sideLength)
 {
     for (int y=0; y<sideLength; y++)

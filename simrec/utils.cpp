@@ -2,6 +2,7 @@
 
 using namespace simrec;
 
+///Reads the data as 8bit unsigned chars and returns it as a ComplexArray
 ComplexArray utils::readFile(const char* filename, const int expectedBytes)
 {
 	std::ifstream stream(filename, std::ios::in | std::ios::binary | std::ios::ate);
@@ -40,6 +41,7 @@ ComplexArray utils::readFile(const char* filename, const int expectedBytes)
 	}
 }
 
+///Saves the absolute values of the given complex data as floats
 void utils::saveFile(const char* filename, const ComplexArray& data)
 {
 	std::ofstream stream(filename, std::ios::out | std::ios::binary);
@@ -84,6 +86,7 @@ void utils::flip2DArray(ComplexArray& data, unsigned int sideLength)
 	}
 }
 
+///Slice a part out of the given image, starting from (startX,startY) and stopping at (startX+width, startY+height)
 Image utils::sliceImage(Image image, unsigned int startX, unsigned int startY, unsigned int width, unsigned int height)
 {
     if (startX > image.getWidth() || startX+width > image.getWidth())

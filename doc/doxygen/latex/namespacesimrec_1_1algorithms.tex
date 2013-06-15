@@ -1,0 +1,173 @@
+\hypertarget{namespacesimrec_1_1algorithms}{\section{simrec\-:\-:algorithms \-Namespace \-Reference}
+\label{namespacesimrec_1_1algorithms}\index{simrec\-::algorithms@{simrec\-::algorithms}}
+}
+
+
+\-Namespace that contains all the programs algorithms.  
+
+
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{namespacesimrec_1_1algorithms_a37aef7debc392fe813383df3acd4d85a}{fft} (\hyperlink{classsimrec_1_1ComplexArray}{\-Complex\-Array} \&data, unsigned int length)
+\begin{DoxyCompactList}\small\item\em \-Fast \-Fourier \-Transform, based on the \-Cooley-\/\-Tukey algorithm. \end{DoxyCompactList}\item 
+\hypertarget{namespacesimrec_1_1algorithms_a5928fdc735369e8c7c844801c765fd69}{void \hyperlink{namespacesimrec_1_1algorithms_a5928fdc735369e8c7c844801c765fd69}{fft\-Rows\-Of} (\hyperlink{classsimrec_1_1ComplexArray}{\-Complex\-Array} \&data, unsigned int side\-Length)}\label{namespacesimrec_1_1algorithms_a5928fdc735369e8c7c844801c765fd69}
+
+\begin{DoxyCompactList}\small\item\em \-Take \-F\-F\-T of the data row by row. \end{DoxyCompactList}\item 
+void \hyperlink{namespacesimrec_1_1algorithms_a0b1ecf3917cd8969b76546aa5bbd3220}{fft2\-D} (\hyperlink{classsimrec_1_1ComplexArray}{\-Complex\-Array} \&data, unsigned int side\-Length)
+\begin{DoxyCompactList}\small\item\em \-Fast \-Fourier \-Transform in two dimensions, based on the \-Cooley-\/\-Tukey algorithm. \end{DoxyCompactList}\item 
+void \hyperlink{namespacesimrec_1_1algorithms_ab4a5ca1d66a169d50f5a7c918885bc51}{ifft} (\hyperlink{classsimrec_1_1ComplexArray}{\-Complex\-Array} \&data, unsigned int length)
+\begin{DoxyCompactList}\small\item\em \-Inverse \-Fast \-Fourier \-Transform, based on the \-Cooley-\/\-Tukey algorithm. \end{DoxyCompactList}\item 
+\hypertarget{namespacesimrec_1_1algorithms_afd5845f2cb25b68b642dcb7fc91ce690}{void \hyperlink{namespacesimrec_1_1algorithms_afd5845f2cb25b68b642dcb7fc91ce690}{ifft\-Rows\-Of} (\hyperlink{classsimrec_1_1ComplexArray}{\-Complex\-Array} \&data, unsigned int length)}\label{namespacesimrec_1_1algorithms_afd5845f2cb25b68b642dcb7fc91ce690}
+
+\begin{DoxyCompactList}\small\item\em \-Take the i\-F\-F\-T of the data row by row. \end{DoxyCompactList}\item 
+void \hyperlink{namespacesimrec_1_1algorithms_a1e135b7132c6eaa3e35de2e890423f07}{ifft2\-D} (\hyperlink{classsimrec_1_1ComplexArray}{\-Complex\-Array} \&data, unsigned int side\-Length)
+\begin{DoxyCompactList}\small\item\em \-Inverse \-Fast \-Fourier \-Transform in two dimensions, based on the \-Cooley-\/\-Tukey algorithm. \end{DoxyCompactList}\item 
+\hyperlink{classsimrec_1_1Image}{\-Image} \hyperlink{namespacesimrec_1_1algorithms_a719042c377348602f0e773ae4acbfd6c}{inverse\-\_\-radon} (\hyperlink{classsimrec_1_1Image}{\-Image} input, int angle\-Start, int angle\-Stop, int angle\-Step)
+\begin{DoxyCompactList}\small\item\em \-Inverse \-Radon transform. \end{DoxyCompactList}\item 
+double \hyperlink{namespacesimrec_1_1algorithms_af1b320ffc5a3ffcc5fd1768d26428f60}{from\-X\-Yto\-Sinogram\-R} (double input\-Mid\-Y, double output\-Mid\-Y, int x, int y, double rad)
+\begin{DoxyCompactList}\small\item\em \-Convert from image coordinates to sinogram coordinates. \end{DoxyCompactList}\item 
+\hypertarget{namespacesimrec_1_1algorithms_ac3ae62bccd131ced7f33a5c7b202603d}{double \hyperlink{namespacesimrec_1_1algorithms_ac3ae62bccd131ced7f33a5c7b202603d}{angle\-To\-Xconversion\-Factor} (int width, int angle\-Start, int angle\-Stop)}\label{namespacesimrec_1_1algorithms_ac3ae62bccd131ced7f33a5c7b202603d}
+
+\begin{DoxyCompactList}\small\item\em \-Calculates the conversion factor from column index to an angle. \end{DoxyCompactList}\item 
+\hypertarget{namespacesimrec_1_1algorithms_aabe59bf3544ee211a44bc030c4fded43}{void \hyperlink{namespacesimrec_1_1algorithms_aabe59bf3544ee211a44bc030c4fded43}{ramp\-Filter} (\hyperlink{classsimrec_1_1ComplexArray}{\-Complex\-Array} \&data, int width, int height, double slope)}\label{namespacesimrec_1_1algorithms_aabe59bf3544ee211a44bc030c4fded43}
+
+\begin{DoxyCompactList}\small\item\em applies a ramp filter to the given 2\-D data \end{DoxyCompactList}\item 
+\hypertarget{namespacesimrec_1_1algorithms_a2055d854578060a9cd86f907ec4fad8f}{void \hyperlink{namespacesimrec_1_1algorithms_a2055d854578060a9cd86f907ec4fad8f}{low\-Pass\-Filter} (\hyperlink{classsimrec_1_1ComplexArray}{\-Complex\-Array} \&data, int width, int height, double slope)}\label{namespacesimrec_1_1algorithms_a2055d854578060a9cd86f907ec4fad8f}
+
+\begin{DoxyCompactList}\small\item\em applies a low pass filter to the given 2\-D data \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Namespace that contains all the programs algorithms. 
+
+\subsection{\-Function \-Documentation}
+\hypertarget{namespacesimrec_1_1algorithms_a37aef7debc392fe813383df3acd4d85a}{\index{simrec\-::algorithms@{simrec\-::algorithms}!fft@{fft}}
+\index{fft@{fft}!simrec::algorithms@{simrec\-::algorithms}}
+\subsubsection[{fft}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf simrec\-::algorithms\-::fft} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Complex\-Array} \&}]{data, }
+\item[{unsigned int}]{length}
+\end{DoxyParamCaption}
+)}}\label{namespacesimrec_1_1algorithms_a37aef7debc392fe813383df3acd4d85a}
+
+
+\-Fast \-Fourier \-Transform, based on the \-Cooley-\/\-Tukey algorithm. 
+
+\-Calculates the \-Fourier transform of the input data. 
+\begin{DoxyParams}{\-Parameters}
+{\em data} & input data to transform \\
+\hline
+{\em length} & length of the data, must be a value that is a power of two. \\
+\hline
+\end{DoxyParams}
+\hypertarget{namespacesimrec_1_1algorithms_a0b1ecf3917cd8969b76546aa5bbd3220}{\index{simrec\-::algorithms@{simrec\-::algorithms}!fft2\-D@{fft2\-D}}
+\index{fft2\-D@{fft2\-D}!simrec::algorithms@{simrec\-::algorithms}}
+\subsubsection[{fft2\-D}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf simrec\-::algorithms\-::fft2\-D} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Complex\-Array} \&}]{data, }
+\item[{unsigned int}]{side\-Length}
+\end{DoxyParamCaption}
+)}}\label{namespacesimrec_1_1algorithms_a0b1ecf3917cd8969b76546aa5bbd3220}
+
+
+\-Fast \-Fourier \-Transform in two dimensions, based on the \-Cooley-\/\-Tukey algorithm. 
+
+\-Calculates the \-Fourier transform of the 2d input data. 
+\begin{DoxyParams}{\-Parameters}
+{\em data} & the input data to transform \\
+\hline
+{\em side\-Length} & the sides length of the rectangular data. \-Must be a value that is a power of two \\
+\hline
+\end{DoxyParams}
+\hypertarget{namespacesimrec_1_1algorithms_af1b320ffc5a3ffcc5fd1768d26428f60}{\index{simrec\-::algorithms@{simrec\-::algorithms}!from\-X\-Yto\-Sinogram\-R@{from\-X\-Yto\-Sinogram\-R}}
+\index{from\-X\-Yto\-Sinogram\-R@{from\-X\-Yto\-Sinogram\-R}!simrec::algorithms@{simrec\-::algorithms}}
+\subsubsection[{from\-X\-Yto\-Sinogram\-R}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf simrec\-::algorithms\-::from\-X\-Yto\-Sinogram\-R} (
+\begin{DoxyParamCaption}
+\item[{double}]{input\-Mid\-Y, }
+\item[{double}]{output\-Mid\-Y, }
+\item[{int}]{x, }
+\item[{int}]{y, }
+\item[{double}]{rad}
+\end{DoxyParamCaption}
+)}}\label{namespacesimrec_1_1algorithms_af1b320ffc5a3ffcc5fd1768d26428f60}
+
+
+\-Convert from image coordinates to sinogram coordinates. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em input\-Mid\-Y} & the middle row index on the sinogram \\
+\hline
+{\em output\-Mid\-Y} & the middle row index on the resulting image \\
+\hline
+{\em x} & the x coordinate where to convert from \\
+\hline
+{\em y} & the y coordinate where to convert from \\
+\hline
+{\em rad} & the angle where to convert from \\
+\hline
+\end{DoxyParams}
+\hypertarget{namespacesimrec_1_1algorithms_ab4a5ca1d66a169d50f5a7c918885bc51}{\index{simrec\-::algorithms@{simrec\-::algorithms}!ifft@{ifft}}
+\index{ifft@{ifft}!simrec::algorithms@{simrec\-::algorithms}}
+\subsubsection[{ifft}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf simrec\-::algorithms\-::ifft} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Complex\-Array} \&}]{data, }
+\item[{unsigned int}]{length}
+\end{DoxyParamCaption}
+)}}\label{namespacesimrec_1_1algorithms_ab4a5ca1d66a169d50f5a7c918885bc51}
+
+
+\-Inverse \-Fast \-Fourier \-Transform, based on the \-Cooley-\/\-Tukey algorithm. 
+
+\-Calculates the \-Inverse \-Fourier transform of the input data. 
+\begin{DoxyParams}{\-Parameters}
+{\em data} & input data to transform \\
+\hline
+{\em length} & length of the data, must be a value that is a power of two. \\
+\hline
+\end{DoxyParams}
+\hypertarget{namespacesimrec_1_1algorithms_a1e135b7132c6eaa3e35de2e890423f07}{\index{simrec\-::algorithms@{simrec\-::algorithms}!ifft2\-D@{ifft2\-D}}
+\index{ifft2\-D@{ifft2\-D}!simrec::algorithms@{simrec\-::algorithms}}
+\subsubsection[{ifft2\-D}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf simrec\-::algorithms\-::ifft2\-D} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Complex\-Array} \&}]{data, }
+\item[{unsigned int}]{side\-Length}
+\end{DoxyParamCaption}
+)}}\label{namespacesimrec_1_1algorithms_a1e135b7132c6eaa3e35de2e890423f07}
+
+
+\-Inverse \-Fast \-Fourier \-Transform in two dimensions, based on the \-Cooley-\/\-Tukey algorithm. 
+
+\-Calculates the \-Inverse \-Fourier transform of the 2d input data in place. 
+\begin{DoxyParams}{\-Parameters}
+{\em data} & the input data to transform \\
+\hline
+{\em side\-Length} & the sides length of the rectangular data. \-Must be a value that is a power of two \\
+\hline
+\end{DoxyParams}
+\hypertarget{namespacesimrec_1_1algorithms_a719042c377348602f0e773ae4acbfd6c}{\index{simrec\-::algorithms@{simrec\-::algorithms}!inverse\-\_\-radon@{inverse\-\_\-radon}}
+\index{inverse\-\_\-radon@{inverse\-\_\-radon}!simrec::algorithms@{simrec\-::algorithms}}
+\subsubsection[{inverse\-\_\-radon}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Image} {\bf simrec\-::algorithms\-::inverse\-\_\-radon} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Image}}]{input, }
+\item[{int}]{angle\-Start, }
+\item[{int}]{angle\-Stop, }
+\item[{int}]{angle\-Step}
+\end{DoxyParamCaption}
+)}}\label{namespacesimrec_1_1algorithms_a719042c377348602f0e773ae4acbfd6c}
+
+
+\-Inverse \-Radon transform. 
+
+\-Calculates the \-Inverse \-Radon transform for the given input data 
+\begin{DoxyParams}{\-Parameters}
+{\em input} & the input data, a sinogram to be transformed \\
+\hline
+{\em angle\-Start} & the starting angle that describes the angle of the first row in the singoram \\
+\hline
+{\em angle\-Stop} & the last angle that describes the angle of the last row in the singoram \\
+\hline
+{\em angle\-Step} & the step that describes how many degrees the original function has rotated when moving a step in the columns of the sinogram \\
+\hline
+\end{DoxyParams}

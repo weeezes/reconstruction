@@ -1,0 +1,113 @@
+\hypertarget{classsimrec_1_1Image}{\section{simrec\-:\-:\-Image \-Class \-Reference}
+\label{classsimrec_1_1Image}\index{simrec\-::\-Image@{simrec\-::\-Image}}
+}
+
+
+\hyperlink{classsimrec_1_1Image}{\-Image} reads and contains 8-\/bit black and white image data.  
+
+
+
+
+{\ttfamily \#include $<$image.\-hpp$>$}
+
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classsimrec_1_1Image_aeb265001e7c92c28379ea7b40cb6fea8}{\-Image} (\hyperlink{classsimrec_1_1ComplexArray}{\-Complex\-Array} data, int width, int height)
+\begin{DoxyCompactList}\small\item\em \-The default constructor. \end{DoxyCompactList}\item 
+\hypertarget{classsimrec_1_1Image_a5a3bc57bd7ba53f9ae55b1963b9ba0a1}{\hyperlink{classsimrec_1_1Image_a5a3bc57bd7ba53f9ae55b1963b9ba0a1}{\-Image} (const \hyperlink{classsimrec_1_1Image}{\-Image} \&other)}\label{classsimrec_1_1Image_a5a3bc57bd7ba53f9ae55b1963b9ba0a1}
+
+\begin{DoxyCompactList}\small\item\em \-Copy constructor. \end{DoxyCompactList}\item 
+\hypertarget{classsimrec_1_1Image_adbe5f8b9f79338c7eb6a66bdc69ca0b7}{int \hyperlink{classsimrec_1_1Image_adbe5f8b9f79338c7eb6a66bdc69ca0b7}{get\-Width} () const }\label{classsimrec_1_1Image_adbe5f8b9f79338c7eb6a66bdc69ca0b7}
+
+\begin{DoxyCompactList}\small\item\em \-Returns the width of the image. \end{DoxyCompactList}\item 
+\hypertarget{classsimrec_1_1Image_a45dd31ebd02682c5963858f62aa53dd9}{int \hyperlink{classsimrec_1_1Image_a45dd31ebd02682c5963858f62aa53dd9}{get\-Height} () const }\label{classsimrec_1_1Image_a45dd31ebd02682c5963858f62aa53dd9}
+
+\begin{DoxyCompactList}\small\item\em returns the height of the image \end{DoxyCompactList}\item 
+int \hyperlink{classsimrec_1_1Image_a03b6118e39e68aedf9f6242477ba6704}{get\-Size} () const 
+\item 
+int \hyperlink{classsimrec_1_1Image_a23039002c90af78b08a11bc1fdfda2eb}{get\-Pixel\-Value} (int x, int y) const 
+\item 
+void \hyperlink{classsimrec_1_1Image_ad6ff38af32650c43f3251e60253a4c57}{upscale\-To\-Closest\-Power\-Of\-Two} ()
+\begin{DoxyCompactList}\small\item\em \-Upscales the image. \end{DoxyCompactList}\item 
+\hypertarget{classsimrec_1_1Image_ab6069101bc808f92dcaae086ec52dbcd}{\hyperlink{classsimrec_1_1ComplexArray}{\-Complex\-Array} \hyperlink{classsimrec_1_1Image_ab6069101bc808f92dcaae086ec52dbcd}{get\-Data} () const }\label{classsimrec_1_1Image_ab6069101bc808f92dcaae086ec52dbcd}
+
+\begin{DoxyCompactList}\small\item\em \-Returns the pixels in the image as a \hyperlink{classsimrec_1_1ComplexArray}{\-Complex\-Array}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\hyperlink{classsimrec_1_1Image}{\-Image} reads and contains 8-\/bit black and white image data. 
+
+\-The \hyperlink{classsimrec_1_1Image}{\-Image} class is used for reading 8-\/bit image data from a file and to keep track of it's information, mainly the width and height of the image. 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classsimrec_1_1Image_aeb265001e7c92c28379ea7b40cb6fea8}{\index{simrec\-::\-Image@{simrec\-::\-Image}!\-Image@{\-Image}}
+\index{\-Image@{\-Image}!simrec::Image@{simrec\-::\-Image}}
+\subsubsection[{\-Image}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Image\-::\-Image} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Complex\-Array}}]{data, }
+\item[{int}]{width, }
+\item[{int}]{height}
+\end{DoxyParamCaption}
+)}}\label{classsimrec_1_1Image_aeb265001e7c92c28379ea7b40cb6fea8}
+
+
+\-The default constructor. 
+
+\-Generates an image from a \hyperlink{classsimrec_1_1ComplexArray}{\-Complex\-Array} 
+\begin{DoxyParams}{\-Parameters}
+{\em data} & \-The data of an image \\
+\hline
+{\em width} & the width of the image \\
+\hline
+{\em height} & the height of the image \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classsimrec_1_1Image_a23039002c90af78b08a11bc1fdfda2eb}{\index{simrec\-::\-Image@{simrec\-::\-Image}!get\-Pixel\-Value@{get\-Pixel\-Value}}
+\index{get\-Pixel\-Value@{get\-Pixel\-Value}!simrec::Image@{simrec\-::\-Image}}
+\subsubsection[{get\-Pixel\-Value}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf \-Image\-::get\-Pixel\-Value} (
+\begin{DoxyParamCaption}
+\item[{int}]{x, }
+\item[{int}]{y}
+\end{DoxyParamCaption}
+) const}}\label{classsimrec_1_1Image_a23039002c90af78b08a11bc1fdfda2eb}
+
+\begin{DoxyParams}{\-Parameters}
+{\em x} & the x coordinate value of the pixel \\
+\hline
+{\em y} & the y coordinate value of the pixel \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+the value of the pixel as a real number 
+\end{DoxyReturn}
+\hypertarget{classsimrec_1_1Image_a03b6118e39e68aedf9f6242477ba6704}{\index{simrec\-::\-Image@{simrec\-::\-Image}!get\-Size@{get\-Size}}
+\index{get\-Size@{get\-Size}!simrec::Image@{simrec\-::\-Image}}
+\subsubsection[{get\-Size}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf \-Image\-::get\-Size} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{classsimrec_1_1Image_a03b6118e39e68aedf9f6242477ba6704}
+ \begin{DoxyReturn}{\-Returns}
+the size as the number of pixels in the contained image 
+\end{DoxyReturn}
+\hypertarget{classsimrec_1_1Image_ad6ff38af32650c43f3251e60253a4c57}{\index{simrec\-::\-Image@{simrec\-::\-Image}!upscale\-To\-Closest\-Power\-Of\-Two@{upscale\-To\-Closest\-Power\-Of\-Two}}
+\index{upscale\-To\-Closest\-Power\-Of\-Two@{upscale\-To\-Closest\-Power\-Of\-Two}!simrec::Image@{simrec\-::\-Image}}
+\subsubsection[{upscale\-To\-Closest\-Power\-Of\-Two}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Image\-::upscale\-To\-Closest\-Power\-Of\-Two} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classsimrec_1_1Image_ad6ff38af32650c43f3251e60253a4c57}
+
+
+\-Upscales the image. 
+
+\-Upscales the image to a rectangle, which has a power-\/of-\/two valued side length. \-The side length is determined from the maximum of the width and height of the image, so that the resulting side length is the smallest power of two value that is larger than this maximum. \-The original image data is padded with zeros, so that no resizing of the original data happens. 
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+simrec/image.\-hpp\item 
+simrec/image.\-cpp\end{DoxyCompactItemize}

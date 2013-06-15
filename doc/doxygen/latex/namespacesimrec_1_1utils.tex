@@ -1,0 +1,95 @@
+\hypertarget{namespacesimrec_1_1utils}{\section{simrec\-:\-:utils \-Namespace \-Reference}
+\label{namespacesimrec_1_1utils}\index{simrec\-::utils@{simrec\-::utils}}
+}
+
+
+\-Namespace that contains all the programs utility functions and constants.  
+
+
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{namespacesimrec_1_1utils_ad5039d23d01e909ad3f8838245ee9afd}{\hyperlink{classsimrec_1_1ComplexArray}{\-Complex\-Array} \hyperlink{namespacesimrec_1_1utils_ad5039d23d01e909ad3f8838245ee9afd}{read\-File} (const char $\ast$filename, const int expected\-Bytes)}\label{namespacesimrec_1_1utils_ad5039d23d01e909ad3f8838245ee9afd}
+
+\begin{DoxyCompactList}\small\item\em \-Reads the data as 8bit unsigned chars and returns it as a \hyperlink{classsimrec_1_1ComplexArray}{\-Complex\-Array}. \end{DoxyCompactList}\item 
+\hypertarget{namespacesimrec_1_1utils_aae1d831d3016debab78d48e7ad273939}{void \hyperlink{namespacesimrec_1_1utils_aae1d831d3016debab78d48e7ad273939}{save\-File} (const char $\ast$filename, const \hyperlink{classsimrec_1_1ComplexArray}{\-Complex\-Array} \&data)}\label{namespacesimrec_1_1utils_aae1d831d3016debab78d48e7ad273939}
+
+\begin{DoxyCompactList}\small\item\em \-Saves the absolute values of the given complex data as floats. \end{DoxyCompactList}\item 
+void \hyperlink{namespacesimrec_1_1utils_a4b4a52628c9ceed1c6a6f3890ac9c0a4}{flip2\-D\-Array} (\hyperlink{classsimrec_1_1ComplexArray}{\-Complex\-Array} \&data, unsigned int side\-Length)
+\begin{DoxyCompactList}\small\item\em \-Transposes the given array. \end{DoxyCompactList}\item 
+\hypertarget{namespacesimrec_1_1utils_abd440a72e5c2b9899fa67deaef12bdeb}{\hyperlink{classsimrec_1_1Image}{\-Image} \hyperlink{namespacesimrec_1_1utils_abd440a72e5c2b9899fa67deaef12bdeb}{slice\-Image} (\hyperlink{classsimrec_1_1Image}{\-Image} image, unsigned int start\-X, unsigned int start\-Y, unsigned int width, unsigned int height)}\label{namespacesimrec_1_1utils_abd440a72e5c2b9899fa67deaef12bdeb}
+
+\begin{DoxyCompactList}\small\item\em \-Slice a part out of the given image, starting from (start\-X,start\-Y) and stopping at (start\-X+width, start\-Y+height) \end{DoxyCompactList}\item 
+void \hyperlink{namespacesimrec_1_1utils_a01c649be4224d2e423a9fd0d5711663e}{split\-Array\-To\-Even\-And\-Odd} (\hyperlink{classsimrec_1_1ComplexArray}{\-Complex\-Array} \&to\-Split, unsigned int length, \hyperlink{classsimrec_1_1ComplexArray}{\-Complex\-Array} \&odd\-Result, \hyperlink{classsimrec_1_1ComplexArray}{\-Complex\-Array} \&even\-Result)
+\begin{DoxyCompactList}\small\item\em \-Splits an array by even and odd indices. \end{DoxyCompactList}\item 
+bool \hyperlink{namespacesimrec_1_1utils_ac1962df3e57d1b70ba8b2e8f845690c2}{is\-A\-Power\-Of\-Two} (unsigned int number)
+\item 
+\hypertarget{namespacesimrec_1_1utils_a3337b0ea03d6f5b70095c95bf34d6ceb}{int \hyperlink{namespacesimrec_1_1utils_a3337b0ea03d6f5b70095c95bf34d6ceb}{round} (double v)}\label{namespacesimrec_1_1utils_a3337b0ea03d6f5b70095c95bf34d6ceb}
+
+\begin{DoxyCompactList}\small\item\em \-Round a value up or down to the closest integer value. \end{DoxyCompactList}\item 
+\hypertarget{namespacesimrec_1_1utils_ad44c6b62c49cefa9caad9e2bbe42e268}{double \hyperlink{namespacesimrec_1_1utils_ad44c6b62c49cefa9caad9e2bbe42e268}{to\-Radians} (double degrees)}\label{namespacesimrec_1_1utils_ad44c6b62c49cefa9caad9e2bbe42e268}
+
+\begin{DoxyCompactList}\small\item\em \-Convert the given degrees to radians. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{namespacesimrec_1_1utils_a743f1eb05e868599e5598feec655cf01}{double const \hyperlink{namespacesimrec_1_1utils_a743f1eb05e868599e5598feec655cf01}{\-P\-I} = 3.\-14159265}\label{namespacesimrec_1_1utils_a743f1eb05e868599e5598feec655cf01}
+
+\begin{DoxyCompactList}\small\item\em \-Pi. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Namespace that contains all the programs utility functions and constants. 
+
+\subsection{\-Function \-Documentation}
+\hypertarget{namespacesimrec_1_1utils_a4b4a52628c9ceed1c6a6f3890ac9c0a4}{\index{simrec\-::utils@{simrec\-::utils}!flip2\-D\-Array@{flip2\-D\-Array}}
+\index{flip2\-D\-Array@{flip2\-D\-Array}!simrec::utils@{simrec\-::utils}}
+\subsubsection[{flip2\-D\-Array}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf simrec\-::utils\-::flip2\-D\-Array} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Complex\-Array} \&}]{data, }
+\item[{unsigned int}]{side\-Length}
+\end{DoxyParamCaption}
+)}}\label{namespacesimrec_1_1utils_a4b4a52628c9ceed1c6a6f3890ac9c0a4}
+
+
+\-Transposes the given array. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em data} & the 2\-D array for transposing \\
+\hline
+{\em side\-Length} & the side length for the rectangular data, has to be a value that is a power of two \\
+\hline
+\end{DoxyParams}
+\hypertarget{namespacesimrec_1_1utils_ac1962df3e57d1b70ba8b2e8f845690c2}{\index{simrec\-::utils@{simrec\-::utils}!is\-A\-Power\-Of\-Two@{is\-A\-Power\-Of\-Two}}
+\index{is\-A\-Power\-Of\-Two@{is\-A\-Power\-Of\-Two}!simrec::utils@{simrec\-::utils}}
+\subsubsection[{is\-A\-Power\-Of\-Two}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf simrec\-::utils\-::is\-A\-Power\-Of\-Two} (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{number}
+\end{DoxyParamCaption}
+)}}\label{namespacesimrec_1_1utils_ac1962df3e57d1b70ba8b2e8f845690c2}
+\-Checks if the input number is a power of two value \hypertarget{namespacesimrec_1_1utils_a01c649be4224d2e423a9fd0d5711663e}{\index{simrec\-::utils@{simrec\-::utils}!split\-Array\-To\-Even\-And\-Odd@{split\-Array\-To\-Even\-And\-Odd}}
+\index{split\-Array\-To\-Even\-And\-Odd@{split\-Array\-To\-Even\-And\-Odd}!simrec::utils@{simrec\-::utils}}
+\subsubsection[{split\-Array\-To\-Even\-And\-Odd}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf simrec\-::utils\-::split\-Array\-To\-Even\-And\-Odd} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Complex\-Array} \&}]{to\-Split, }
+\item[{unsigned int}]{length, }
+\item[{{\bf \-Complex\-Array} \&}]{odd\-Result, }
+\item[{{\bf \-Complex\-Array} \&}]{even\-Result}
+\end{DoxyParamCaption}
+)}}\label{namespacesimrec_1_1utils_a01c649be4224d2e423a9fd0d5711663e}
+
+
+\-Splits an array by even and odd indices. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em to\-Split} & the array that gets split. \\
+\hline
+{\em length} & the length of the array, the value is expected to be a power of two. \\
+\hline
+{\em odd\-Result} & an array with a size of length/2, where the odd index values are saved to \\
+\hline
+{\em even\-Result} & an array with a size of length/2, where the even index values are saved to \\
+\hline
+\end{DoxyParams}

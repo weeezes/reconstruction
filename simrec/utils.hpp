@@ -10,6 +10,7 @@
 
 namespace simrec {
 
+	/// Namespace that contains all the programs utility functions and constants
     namespace utils {
 		ComplexArray readFile(const char* filename, const int expectedBytes);
         void saveFile(const char* filename, const ComplexArray& data);
@@ -24,6 +25,7 @@ namespace simrec {
         int round(double v);
         double toRadians(double degrees);
         
+        ///Pi
         double const PI = 3.14159265;
     }
 }

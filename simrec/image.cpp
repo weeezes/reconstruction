@@ -4,10 +4,8 @@ using namespace simrec;
 
 /// The default constructor
 /**
-* Reads the image from the given path with the width and height information.
-* This class expects the data to be in an 8-bit raw format, with only the
-* pixel information in it.
-* @param filename the path to the file that is to be read
+* Generates an image from a ComplexArray
+* @param data The data of an image
 * @param width the width of the image
 * @param height the height of the image
 */
@@ -20,6 +18,7 @@ Image::Image(ComplexArray data, int width, int height)
             this->height = height;
 }
 
+///Copy constructor
 Image::Image(const Image& other)
     : imageData(0)
 {
@@ -29,11 +28,13 @@ Image::Image(const Image& other)
     this->size = other.getSize();
 }
 
+///Returns the width of the image
 int Image::getWidth() const
 {
     return width;
 }
 
+///returns the height of the image
 int Image::getHeight() const
 {
     return height;
@@ -90,6 +91,7 @@ void Image::upscaleToClosestPowerOfTwo()
     this->height = newSide;
 }
 
+///Returns the pixels in the image as a ComplexArray
 ComplexArray Image::getData() const
 {
     return this->imageData;

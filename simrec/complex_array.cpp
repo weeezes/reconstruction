@@ -2,34 +2,40 @@
 
 using namespace simrec;
 
+///Default constructor
 ComplexArray::ComplexArray(int size)
 {
     this->size = size;
     this->array = new std::complex<double>[size];
 }
 
+///Initialize a ComplexArray from a raw std::complex<double>* array
+ComplexArray::ComplexArray(std::complex<double>* array, int size)
+{
+    this->array = array;
+    this->size = size;
+}
+
+///Copy constructor
 ComplexArray::ComplexArray(const ComplexArray& other)
 {
     this->size = other.getSize();
     this->array = other.toArray();
 }
 
-ComplexArray::ComplexArray(std::complex<double>* array, int size)
-{
-    this->size = size;
-    this->array = array;
-}
-
+///Destructor
 ComplexArray::~ComplexArray()
 {
     delete[] this->array;
 }
 
+///Returns the size of the array
 int ComplexArray::getSize() const
 {
     return this->size;
 }
 
+///Returns a value that can't change the value inside of the array
 std::complex<double> ComplexArray::get(int index) const
 {
     if (index < 0 || index > getSize()-1)
