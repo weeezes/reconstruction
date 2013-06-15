@@ -8,7 +8,7 @@ using namespace simrec;
 * @param data input data to transform
 * @param length length of the data, must be a value that is a power of two.
 */
-void algorithms::fft(ComplexArray& data, int i, unsigned int length)
+void algorithms::fft(ComplexArray& data, unsigned int length)
 {
     if (length == 1)
         return;
@@ -21,8 +21,8 @@ void algorithms::fft(ComplexArray& data, int i, unsigned int length)
 
     utils::splitArrayToEvenAndOdd(data, length, odd, even);
 
-    algorithms::fft(even, 0, length/2);
-    algorithms::fft(odd, 0, length/2);
+    algorithms::fft(even, length/2);
+    algorithms::fft(odd, length/2);
 
     for (int k=0; k<=length/2-1; k++)
     {
@@ -38,7 +38,7 @@ void algorithms::fftRowsOf(ComplexArray& data, unsigned int sideLength)
     { 
 		ComplexArray slice = data.slice(y*sideLength, y*sideLength+sideLength-1);
         
-        algorithms::fft(slice, 0, sideLength);
+        algorithms::fft(slice, sideLength);
 
         data.replaceRegionWith(slice, y*sideLength);
     }
@@ -71,7 +71,7 @@ void algorithms::fft2D(ComplexArray& data, unsigned int sideLength)
 * @param data input data to transform
 * @param length length of the data, must be a value that is a power of two.
 */
-void algorithms::ifft(ComplexArray& data, int i, unsigned int length)
+void algorithms::ifft(ComplexArray& data, unsigned int length)
 {
     if (length == 1)
         return;
@@ -84,8 +84,8 @@ void algorithms::ifft(ComplexArray& data, int i, unsigned int length)
 
     utils::splitArrayToEvenAndOdd(data, length, odd, even);
 
-    algorithms::ifft(even, 0, length/2);
-    algorithms::ifft(odd, 0, length/2);
+    algorithms::ifft(even, length/2);
+    algorithms::ifft(odd, length/2);
 
     for (int k=0; k<=length/2-1; k++)
     {
@@ -100,7 +100,7 @@ void algorithms::ifftRowsOf(ComplexArray& data, unsigned int sideLength)
     { 
 		ComplexArray slice = data.slice(y*sideLength, y*sideLength+sideLength-1);
         
-        algorithms::ifft(slice, 0, sideLength);
+        algorithms::ifft(slice, sideLength);
 
         data.replaceRegionWith(slice, y*sideLength);
         

@@ -13,11 +13,11 @@ namespace simrec {
 	/// Namespace that contains all the programs algorithms
     namespace algorithms {
         
-        void fft(ComplexArray& data, int i, unsigned int length);
+        void fft(ComplexArray& data, unsigned int length);
         void fftRowsOf(ComplexArray& data, unsigned int sideLength);
 	    void fft2D(ComplexArray& data, unsigned int sideLength);
 
-        void ifft(ComplexArray& data, int i, unsigned int length);
+        void ifft(ComplexArray& data, unsigned int length);
         void ifftRowsOf(ComplexArray& data, unsigned int length);
 	    void ifft2D(ComplexArray& data, unsigned int sideLength);
 
