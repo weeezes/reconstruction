@@ -20,9 +20,12 @@ ComplexArray utils::readFile(const char* filename, const int expectedBytes)
 			stream.close();
 
 			for (int i=0; i<size; i++)
-				data[i] = std::complex<double>(raw[i]*1.0, 0.0);
+            {
+                double pixelValue = 1.0*((unsigned char) raw[i]);
+				data[i] = std::complex<double>(pixelValue, 0.0);
+            }
 
-			delete[] raw;
+            delete[] raw;
 
 			return data;
 		}
@@ -43,15 +46,12 @@ void utils::saveFile(const char* filename, const ComplexArray& data)
 
     if (stream.is_open())
     {   
-
-        std::cout << "Writing out " << data.getSize() << " points." << std::endl;
-
         for (int i=0; i<data.getSize(); i++)
         {
             float v = static_cast<float> ( std::abs(data.get(i)) );
-
             stream.write((char*)( &v ), sizeof(v));
         }
+
         if (!stream.fail())
             std::cout << "File saved." << std::endl;
     }
@@ -138,6 +138,18 @@ bool utils::isAPowerOfTwo(unsigned int number)
     return (number & (number-1)) == 0;
 }
 
+///Round a value up or down to the closest integer value
+int utils::round(double v)
+{
+    int dv = (int) (v - std::floor(v) + 0.5);
+
+    if (dv == 0)
+        return (int) std::floor(v);
+    else
+        return (int) std::ceil(v);
+}
+
+///Convert the given degrees to radians
 double utils::toRadians(double degrees)
 {
     return degrees*PI/180.0;

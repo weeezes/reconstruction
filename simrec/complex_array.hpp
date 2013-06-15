@@ -19,6 +19,7 @@ public:
     std::complex<double>* toArray() const;
 
     ComplexArray slice(int start, int stop) const;
+    void replaceRegionWith(ComplexArray& replacement, int regionStart);
 
     std::complex<double>& operator[] (const int index);
     ComplexArray operator*(const std::complex<double> v);

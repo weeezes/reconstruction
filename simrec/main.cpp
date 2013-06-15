@@ -28,8 +28,8 @@ int main(int argc, char* argv[]) {
 
 	//Filter the data and ifft it back
     algorithms::fft2D(data, img.getWidth());
-//	algorithms::lowPassFilter(data, img.getWidth(), img.getHeight(), 0.80);
-//	algorithms::rampFilter(data, img.getWidth(), img.getHeight(), 10.0);
+    algorithms::lowPassFilter(data, img.getWidth(), img.getHeight(), 0.8);
+	algorithms::rampFilter(data, img.getWidth(), img.getHeight(), 30.0);
     algorithms::ifft2D(data, img.getWidth());
 
 

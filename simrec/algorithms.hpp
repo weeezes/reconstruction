@@ -14,13 +14,17 @@ namespace simrec {
     namespace algorithms {
         
         void fft(ComplexArray& data, int i, unsigned int length);
+        void fftRowsOf(ComplexArray& data, unsigned int sideLength);
 	    void fft2D(ComplexArray& data, unsigned int sideLength);
 
         void ifft(ComplexArray& data, int i, unsigned int length);
+        void ifftRowsOf(ComplexArray& data, unsigned int length);
 	    void ifft2D(ComplexArray& data, unsigned int sideLength);
 
         Image inverse_radon(Image input, int angleStart, int angleStop, int angleStep);   
-
+        double fromXYtoSinogramR(double inputMidY, double outputMidY, int x, int y, double rad);
+        double angleToXconversionFactor(int width, int angleStart, int angleStop); 
+        
 		void rampFilter(ComplexArray& data, int width, int height, double slope);
 		void lowPassFilter(ComplexArray& data, int width, int height, double slope);
     }

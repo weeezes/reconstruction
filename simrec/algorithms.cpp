@@ -4,7 +4,7 @@ using namespace simrec;
 
 /// Fast Fourier Transform, based on the Cooley-Tukey algorithm
 /**
-* Calculates the Fourier transform of the input data in place.
+* Calculates the Fourier transform of the input data.
 * @param data input data to transform
 * @param length length of the data, must be a value that is a power of two.
 */
@@ -26,15 +26,27 @@ void algorithms::fft(ComplexArray& data, int i, unsigned int length)
 
     for (int k=0; k<=length/2-1; k++)
     {
-        data[k] = even[k] + odd[k]*std::polar(1.0, -2*3.14*k/length);
-        data[k+length/2] = even[k] - odd[k]*std::polar(1.0, -2*3.14*k/length);
+        data[k] = even[k] + odd[k]*std::polar(1.0, -2.0*3.14*k/length);
+        data[k+length/2] = even[k] - odd[k]*std::polar(1.0, -2.0*3.14*k/length);
     }
     
 }
 
+void algorithms::fftRowsOf(ComplexArray& data, unsigned int sideLength)
+{
+    for (int y=0; y<sideLength; y++)
+    { 
+		ComplexArray slice = data.slice(y*sideLength, y*sideLength+sideLength-1);
+        
+        algorithms::fft(slice, 0, sideLength);
+
+        data.replaceRegionWith(slice, y*sideLength);
+    }
+}
+
 /// Fast Fourier Transform in two dimensions, based on the Cooley-Tukey algorithm
 /**
-* Calculates the Fourier transform of the 2d input data in place.
+* Calculates the Fourier transform of the 2d input data.
 * @param data the input data to transform
 * @param sideLength the sides length of the rectangular data. Must be a value that
 * is a power of two
@@ -44,34 +56,18 @@ void algorithms::fft2D(ComplexArray& data, unsigned int sideLength)
     if (!utils::isAPowerOfTwo(sideLength))
         throw "Not a power of two!";
 
-    for (int y=0; y<sideLength; y++)
-    { 
-		ComplexArray slice = data.slice(y*sideLength, y*sideLength+sideLength-1);
-        algorithms::fft(slice, 0, sideLength);
-		for (int i=0; i<sideLength; i++)
-		{
-			data[y*sideLength+i] = slice[i];
-		}
-    }
+    fftRowsOf(data, sideLength);
 
     utils::flip2DArray(data, sideLength);
 
-    for (int y=0; y<sideLength; y++)
-    { 
-		ComplexArray slice = data.slice(y*sideLength, y*sideLength+sideLength-1);
-        algorithms::fft(slice, 0, sideLength);
-		for (int i=0; i<sideLength; i++)
-		{
-			data[y*sideLength+i] = slice[i];
-		}
-    }
+    fftRowsOf(data, sideLength);
 
     utils::flip2DArray(data, sideLength);
 }
 
 /// Inverse Fast Fourier Transform, based on the Cooley-Tukey algorithm
 /**
-* Calculates the Inverse Fourier transform of the input data in place.
+* Calculates the Inverse Fourier transform of the input data.
 * @param data input data to transform
 * @param length length of the data, must be a value that is a power of two.
 */
@@ -93,8 +89,24 @@ void algorithms::ifft(ComplexArray& data, int i, unsigned int length)
 
     for (int k=0; k<=length/2-1; k++)
     {
-        data[k] = even[k] + odd[k]*std::polar(1.0, 2*utils::PI*k/length);
-        data[k+length/2] = even[k] - odd[k]*std::polar(1.0, 2*utils::PI*k/length);
+        data[k] = even[k] + odd[k]*std::polar(1.0, 2.0*utils::PI*k/length);
+        data[k+length/2] = even[k] - odd[k]*std::polar(1.0, 2.0*utils::PI*k/length);
+    }
+}
+
+void algorithms::ifftRowsOf(ComplexArray& data, unsigned int sideLength)
+{
+    for (int y=0; y<sideLength; y++)
+    { 
+		ComplexArray slice = data.slice(y*sideLength, y*sideLength+sideLength-1);
+        
+        algorithms::ifft(slice, 0, sideLength);
+
+        data.replaceRegionWith(slice, y*sideLength);
+        
+		// normalization
+        for (int i=y*sideLength; i<y*sideLength+sideLength; i++)
+            data[i] = data[i]/std::complex<double>(sideLength, 0.0);
     }
 }
 
@@ -110,40 +122,23 @@ void algorithms::ifft2D(ComplexArray& data, unsigned int sideLength)
     if (!utils::isAPowerOfTwo(sideLength))
         throw "Not a power of two!";
 
-
-    for (int y=0; y<sideLength; y++)
-    { 
-		ComplexArray slice = data.slice(y*sideLength, y*sideLength+sideLength-1);
-        algorithms::ifft(slice, 0, sideLength);
-		for (int i=0; i<sideLength; i++)
-		{
-			data[y*sideLength+i] = slice[i];
-		}
-        
-		// normalization
-        for (int i=y*sideLength; i<y*sideLength+sideLength; i++)
-            data[i] = data[i]/std::complex<double>(sideLength, 0.0);
-    }
+    ifftRowsOf(data, sideLength);
 
     utils::flip2DArray(data, sideLength);
 
-    for (int y=0; y<sideLength; y++)
-    { 
-		ComplexArray slice = data.slice(y*sideLength, y*sideLength+sideLength-1);
-        algorithms::ifft(slice, 0, sideLength);
-		for (int i=0; i<sideLength; i++)
-		{
-			data[y*sideLength+i] = slice[i];
-		}
-
-        // normalization
-        for (int i=y*sideLength; i<y*sideLength+sideLength; i++)
-            data[i] = data[i]/std::complex<double>(sideLength, 0.0);
-    }
+    ifftRowsOf(data, sideLength);
 
     utils::flip2DArray(data, sideLength);
 }
 
+///Inverse Radon transform
+/** 
+ * Calculates the Inverse Radon transform for the given input data
+ * @param input the input data, a sinogram to be transformed
+ * @param angleStart the starting angle that describes the angle of the first row in the singoram 
+ * @param angleStop the last angle that describes the angle of the last row in the singoram
+ * @param angleStep the step that describes how many degrees the original function has rotated when moving a step in the columns of the sinogram
+ */
 Image algorithms::inverse_radon(Image input, int angleStart, int angleStop, int angleStep)
 {
     // estimate output width
@@ -152,36 +147,28 @@ Image algorithms::inverse_radon(Image input, int angleStart, int angleStop, int 
     ComplexArray transformedData(outputWidth*outputWidth);
     ComplexArray inputData = input.getData();
 
-    int inputMidIndex = (int) ( input.getHeight() / 2.0 + 0.5 );
-    int outputMidIndex = (int) ( outputWidth / 2.0 + 1.5);
+    double inputMidY = input.getHeight() / 2.0;
+    double outputMidY = outputWidth / 2.0;
 	
-	double dt = 1.0*input.getWidth()/(angleStop-angleStart);
+    double dt = angleToXconversionFactor(input.getWidth(), angleStart, angleStop);
 
     for (int y=0; y<outputWidth; y++)
     {
         for (int x=0; x<outputWidth; x++)
         {
-            for (int k=angleStart; k<=angleStop; k+=angleStep)
+            for (int k=0; k<input.getWidth(); k+=angleStep)
             {
-                double rad = utils::toRadians(k);
+                double rad = utils::toRadians(dt*k);
 
-                double ra = inputMidIndex + ( x - outputMidIndex )*std::sin(rad) + ( y - outputMidIndex )*std::cos(rad);
-				double rb = std::floor(ra);
-				
-				std::complex<double> w1 = std::complex<double>(ra-rb, ra-rb);
-				std::complex<double> w2 = std::complex<double>(1-ra+rb, 1-ra+rb);
+                double r = fromXYtoSinogramR(inputMidY, outputMidY, x, y, rad);
 
-				int t = (int) (dt*(k-angleStart) + 0.5);
-
-                if (rb >= 0 && rb < input.getHeight()-1)
+                int rIndex = utils::round(r);
+                if (rIndex >= 0 && rIndex < input.getHeight())
 				{
-                    transformedData[y*outputWidth+x] += w1*inputData[t + rb*input.getWidth()];
-					transformedData[y*outputWidth+x] += w2*inputData[t + rb*input.getWidth()+1];
-
+                    std::complex<double> pixel = inputData[k + rIndex*input.getWidth()];
+                    transformedData[y*outputWidth+x] += pixel;
 				}
             }
-
-			transformedData[y*outputWidth+x] *= std::complex<double>(1.0/outputWidth, 1.0/outputWidth);
         }
     }
 
@@ -190,34 +177,70 @@ Image algorithms::inverse_radon(Image input, int angleStart, int angleStop, int 
     return transformed;
 }
 
+///Convert from image coordinates to sinogram coordinates
+/**
+ *@param inputMidY the middle row index on the sinogram
+ *@param outputMidY the middle row index on the resulting image
+ *@param x the x coordinate where to convert from
+ *@param y the y coordinate where to convert from
+ *@param rad the angle where to convert from
+ */
+double algorithms::fromXYtoSinogramR(double inputMidY, double outputMidY, int x, int y, double rad)
+{
+    double xTerm = ( x - outputMidY )*std::sin(rad);
+    double yTerm = ( y - outputMidY )*std::cos(rad);
+    double ra = inputMidY + xTerm + yTerm;
+}
+
+///Calculates the conversion factor from column index to an angle
+/* A column may not always represent a rotation of one angle, so this
+ * function calculates how many degrees of rotation a step from a column to the next
+ * represents.
+ * @param width the width of the sinogram
+ * @param angleStart the angle which the first column represents
+ * @param angleStop the angle which the last column represents
+ * */
+double algorithms::angleToXconversionFactor(int width, int angleStart, int angleStop)
+{
+   return 1.0*(angleStop-angleStart)/width;
+}
+
+///applies a ramp filter to the given 2D data
 void algorithms::rampFilter(ComplexArray& data, int width, int height, double slope)
 {
+    double max_r = std::sqrt(width*width/4+height*height/4);
+
 	for (int y=0; y<height; y++)
 	{
 		for (int x=0; x<width; x++)
 		{
 			int dy = y-height/2;
 			int dx = x-width/2;
-			double r = std::sqrt(dy*dy+dx*dx);
-			data[y*width+x] = data[y*width+x]*std::complex<double>(r*slope, r*slope);
-		}
+			double r = max_r - std::sqrt(dy*dy+dx*dx);
+			data[y*width+x] *= r*slope;
+        }
 	}
 }
 
+///applies a low pass filter to the given 2D data
 void algorithms::lowPassFilter(ComplexArray& data, int width, int height, double cutoff_percentage)
 {
 	double max_r = std::sqrt(width*width/4+height*height/4);
 	double cutoff_r = max_r*cutoff_percentage;
 
+    int cutoffMaxY = (int)(height*cutoff_percentage + 0.5);
+    int cutoffMaxX = (int)(width*cutoff_percentage + 0.5);
+    int cutoffMinY = height-cutoffMaxY;
+    int cutoffMinX = width-cutoffMaxX;
+
 	for (int y=0; y<height; y++)
 	{
 		for (int x=0; x<width; x++)
 		{
-			int dy = y-height/2;
-			int dx = x-width/2;
-			double r = std::sqrt(dy*dy+dx*dx);
-			if (r < cutoff_r)
-				data[y*width+x] = std::complex<double>(0.0, 0.0);
+            if (x > cutoffMinX && x < cutoffMaxX)
+                data[y*width+x] = std::complex<double>(0.0, 0.0);
+            if (y > cutoffMinY && y < cutoffMaxY)
+                data[y*width+x] = std::complex<double>(0.0, 0.0);
 		}
 	}
 }

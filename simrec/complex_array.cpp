@@ -81,6 +81,26 @@ ComplexArray ComplexArray::slice(int start, int stop) const
     return s;
 }
 
+///Replace a region of the ComplexArray with another ComplexArray
+/**
+ * Replaces a region of the ComplexArray with a smaller replacement
+ * ComplexArray, starting from a given index.
+ * @param replacement the replacement ComplexArray. Must fit into the other ComplexArray so that replacement.getSize()+regionStart - 1 < the size of this ComplexArray
+ * @param regionStart the index where to start the replacing
+ */
+void ComplexArray::replaceRegionWith(ComplexArray& replacement, int regionStart)
+{
+    if (replacement.getSize()+regionStart-1 >= getSize())
+    {
+        throw "The replacement doesn't fit inside of the ComplexArray";
+    }
+
+    for (int i=0; i<replacement.getSize(); i++)
+    {
+        this->array[regionStart + i] = replacement[i];
+    }
+}
+
 std::complex<double>& ComplexArray::operator[](const int index)
 {
     if ( index < 0 || index > getSize()-1)
