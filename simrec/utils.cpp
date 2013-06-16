@@ -55,7 +55,7 @@ void utils::saveFile(const char* filename, const ComplexArray& data)
         }
 
         if (!stream.fail())
-            std::cout << "File saved." << std::endl;
+            std::cout << "File saved." << std::endl << std::endl;
     }
     else
     {

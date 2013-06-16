@@ -17,7 +17,7 @@ BOOST_AUTO_TEST_CASE( one_dimensional_fft_1 )
     for (int i=0; i<size; i++)
         data[i] = std::polar(1.0, 0.0);
 
-    algorithms::fft(data, 0, size);
+    algorithms::fft(data, size);
 
     BOOST_CHECK_EQUAL(data[0], std::polar(4.0, 0.0));
     BOOST_CHECK_EQUAL(data[1], std::polar(0.0, 0.0));
@@ -36,7 +36,7 @@ BOOST_AUTO_TEST_CASE( one_dimensional_fft_2 )
     data[2] = std::polar(0.0, 0.0);
     data[3] = std::polar(1.0, 0.0);
 
-    algorithms::fft(data, 0, size);
+    algorithms::fft(data, size);
 
     double epsilon = 0.001;
     BOOST_CHECK_EQUAL(data[0], std::polar(2.0, 0.0));

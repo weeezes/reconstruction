@@ -41,6 +41,6 @@
     Kaikkea koodia ei ole testattu eikä kommentoitu, jätän tämän tehtäväksi - piru minut periköön - seuraavalle viikolle, ja saada tämän viikon edes jotenkuten pakettiin.  
     
     \section*{Mitä seuraavaksi?}
-    Seuraavaksi olisi syytä saada selvitettyä kuinka data tallennetaan tiedostoon niin, että mikään ei hajoa matkalla. Intresseihini kuuluu myös saada itse Radon-käänteismuunnos valmiiksi. Minulla on kumpaankin jonkinlainen runko, mistä lähteä painimaan, jos muu     
+    Seuraavaksi olisi syytä saada selvitettyä kuinka data tallennetaan tiedostoon niin, että mikään ei hajoa matkalla. Intresseihini kuuluu myös saada itse Radon-käänteismuunnos valmiiksi. Minulla on kumpaankin jonkinlainen runko aluilla, ongelmaksi koituu kuitenkin se, että kun toinen on hajalla niin on hankalaa todentaa toisen toimivan. En keksi tapaa varmistaa Radon-käänteismuunnoksen toimivuutta muuta kuin silmämääräisesti tarkistamalla lopputuloksen.    
      
 \end{document}

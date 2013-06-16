@@ -21,7 +21,7 @@ namespace simrec {
         void ifftRowsOf(ComplexArray& data, unsigned int length);
 	    void ifft2D(ComplexArray& data, unsigned int sideLength);
 
-        Image inverse_radon(Image input, int angleStart, int angleStop, int angleStep);   
+        Image inverseRadonTransform(Image input, int angleStart, int angleStop, int angleStep);   
         double fromXYtoSinogramR(double inputMidY, double outputMidY, int x, int y, double rad);
         double angleToXconversionFactor(int width, int angleStart, int angleStop); 
         

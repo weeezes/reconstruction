@@ -51,22 +51,22 @@ BOOST_AUTO_TEST_CASE ( upscale_image) {
     BOOST_CHECK_EQUAL(sumPixelsInColumn(image, newHeight, 6), 0);
     BOOST_CHECK_EQUAL(sumPixelsInColumn(image, newHeight, 7), 0);
 
-    BOOST_CHECK_EQUAL(image.getPixelValue(2, 1), 1); 
-    BOOST_CHECK_EQUAL(image.getPixelValue(4, 1), 1);
+    BOOST_CHECK_EQUAL(image.getPixelValue(2, 1), 255); 
+    BOOST_CHECK_EQUAL(image.getPixelValue(4, 1), 255);
 
-    BOOST_CHECK_EQUAL(image.getPixelValue(1, 2), 1);
-    BOOST_CHECK_EQUAL(image.getPixelValue(3, 2), 1);
-    BOOST_CHECK_EQUAL(image.getPixelValue(5, 2), 1);
+    BOOST_CHECK_EQUAL(image.getPixelValue(1, 2), 255);
+    BOOST_CHECK_EQUAL(image.getPixelValue(3, 2), 255);
+    BOOST_CHECK_EQUAL(image.getPixelValue(5, 2), 255);
 
-    BOOST_CHECK_EQUAL(image.getPixelValue(2, 3), 1);
-    BOOST_CHECK_EQUAL(image.getPixelValue(4, 3), 1);
+    BOOST_CHECK_EQUAL(image.getPixelValue(2, 3), 255);
+    BOOST_CHECK_EQUAL(image.getPixelValue(4, 3), 255);
 
-    BOOST_CHECK_EQUAL(image.getPixelValue(1, 4), 1);
-    BOOST_CHECK_EQUAL(image.getPixelValue(3, 4), 1);
-    BOOST_CHECK_EQUAL(image.getPixelValue(5, 4), 1);
+    BOOST_CHECK_EQUAL(image.getPixelValue(1, 4), 255);
+    BOOST_CHECK_EQUAL(image.getPixelValue(3, 4), 255);
+    BOOST_CHECK_EQUAL(image.getPixelValue(5, 4), 255);
 
-    BOOST_CHECK_EQUAL(image.getPixelValue(2, 5), 1);
-    BOOST_CHECK_EQUAL(image.getPixelValue(4, 5), 1);
+    BOOST_CHECK_EQUAL(image.getPixelValue(2, 5), 255);
+    BOOST_CHECK_EQUAL(image.getPixelValue(4, 5), 255);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

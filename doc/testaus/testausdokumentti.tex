@@ -1,0 +1,56 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage{ucs}
+\usepackage[finnish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[figurename=Kuva, tablename=Taulukko]{caption}
+
+\author{Vesa Hagström}
+
+
+\begin{document}
+    \renewcommand{\bibname}{Viitteet}
+
+	\begin{titlepage}
+    \label{Title}
+	\begin{flushleft}
+		\hfill Vesa Hagström 											\\
+		\hfill \texttt{vesa.hagstrom@helsinki.fi} 						\\
+		\hfill Op.Nro: 013865575											\\
+		\hfill Tiralabra harjoitustyö									\\
+		\hfill 16.6.2013													\\
+	\end{flushleft}
+
+	\vfill
+
+	\begin{center}
+		\huge{Simrec testausdokumentti}
+	\end{center}
+
+	\vfill
+
+	\end{titlepage}
+
+    \section{Yksikkötestit}
+    \label{yksikko}
+
+    Ohjeet yksikkötestien ajamiseen löytyy dokumentista \textit{Simrec käyttöohje}.
+    
+    Yksikkötesteillä testataan olennaiset asiat ohjelman ja sen luokkien toiminnallisuuksista. Kattava ja ajantasainen kooste yksikkötesteistä löytyy vilkaisemalla \textit{tests}-kansiosta löytyvää lähdekoodia.
+    
+    \section{Käsintestaus}
+    Kansiosta \textit{misc} löytyy testidataa, joka on nimetty siten että tiedostonimestä käy ilmi kuvan dimensiot. Kuvien nimet ovat muodossa \texttt{tunniste\_leveys\_korkeus\_bittisyys.raw}. Testidata on nimetty siten, että tunnisteesta käy ilmi, mitä tuloksen tulisi muistuttaa. 
+    
+    Käsintestauksen askeleet:
+    \begin{enumerate}
+    \item Aja simrec antamalla sille jokin \textit{misc}-kansion testikuvista. Ohjeet dokumentissa \textit{Simrec käyttöohje}.
+    \item Avaa esimerkiksi ImageJ:llä simrec:n tuloskuva \textit{transformed.raw} käyttämällä raakadatan import-toimintoa. Simrecin tulokset ovat 32-bittisiä liukulukuja, tuloksen dimensiot käyvät ilmi simrec:n ajon päättyessä tulostamasta tekstistä.
+    \end{enumerate}
+    
+    Kansiosta \textit{doc/valmiita\_tuloksia} löytyy png-muotoisia kuvia, mistä näkee sinogrammin ja siitä simrec:llä muodostetun tuloksen.
+\end{document}

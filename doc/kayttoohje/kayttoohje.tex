@@ -1,0 +1,95 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage{ucs}
+\usepackage[finnish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[figurename=Kuva, tablename=Taulukko]{caption}
+
+\author{Vesa Hagström}
+
+
+\begin{document}
+    \renewcommand{\bibname}{Viitteet}
+
+	\begin{titlepage}
+    \label{Title}
+	\begin{flushleft}
+		\hfill Vesa Hagström 											\\
+		\hfill \texttt{vesa.hagstrom@helsinki.fi} 						\\
+		\hfill Op.Nro: 013865575											\\
+		\hfill Tiralabra harjoitustyö									\\
+		\hfill 16.6.2013													\\
+	\end{flushleft}
+
+	\vfill
+
+	\begin{center}
+		\huge{Simrec käyttöohje}
+	\end{center}
+
+	\vfill
+
+	\end{titlepage}
+
+    \section{Ohjelman kääntäminen}
+    \label{kaantaminen}
+        Ohjelman kääntäminen testeineen vaatii Boost-kirjaston. Pelkän ohjelman kääntäminen onnistuu ilman Boost:ia. Ohje olettaa, että ohjelma käännetään ja ajetaan Linux-ympäristössä ja että käyttäjällä on asennettuna CMake.
+        
+        \subsection{Ohjelman kääntäminen testeineen}
+        \label{testeineen}
+        \begin{enumerate}
+            \item Mene repositorykansion juureen.
+            \item luo build kansio komennolla \texttt{mkdir build}
+            \item siirry build kansioon komennolla \texttt{cd build}
+            \item aja cmake komennolla \texttt{cmake ..}, tämä luo \texttt{make}:n vaatiman Makefile:n
+            \item aja make komennolla \texttt{make}
+            \item Simrec-ohjelma löytyy kansiosta \textit{simrec} ja testit kansiosta \textit{tests}.
+        \end{enumerate}
+        
+        \textbf{HUOM:} testit tulee ajaa suoraan \textit{tests}-kansion juuresta komennolla \texttt{./run\_tests}. Tämä siksi, että jotkut testit olettavat testidatan löytyvän tietyn matkan päästä testikansion alapuolelta.
+        
+        \subsection{Ohjelman kääntäminen ilman testejä}
+        \label{ei_testeja}
+        \begin{enumerate}
+            \item Mene repositorykansion juureen.
+            \item luo build kansio komennolla \texttt{mkdir simrec/build}
+            \item siirry luotuun \textit{build}-kansioon komennolla \texttt{cd simrec/build}
+            \item aja cmake komennolla \texttt{cmake ..}, tämä luo \texttt{make}:n vaatiman Makefile:n
+            \item aja make komennolla \texttt{make}
+            \item Simrec-ohjelma löytyy \textit{build}-kansion juuresta \texttt{./simrec}
+        \end{enumerate}
+        
+    \section{Ohjelman ja testien ajaminen}
+    
+    Varmista, että olet kääntänyt haluamasi palat ohjelmasta kohdan (\ref{kaantaminen}) mukaisesti.
+    
+    \subsection{Simrec:n ajaminen}
+    Riippuen kumman kohdan mukaan käänsit ohjelman, löydät \texttt{simrec}-ohjelman kohdan (\ref{testeineen}) tai (\ref{ei_testeja}) kuudennen askeleen osoittamasta paikasta.
+    
+    Simrec haluaa komentoriviparametreina muunnettavan 8-bittisen kuvadatan ja sen dimensiot muodossa:
+\newline
+\newline
+    \texttt{./simrec polku\_kuvaan leveys korkeus}
+\newline
+
+    Olettaen, että olet \texttt{simrec}:n sisältämässä kansiossa voit ajaa ohjelman esimerkiksi seuraavalla komennolla:
+\newline
+\newline
+    \texttt{./simrec ../../misc/shepplogan\_180\_728\_8bit.raw 180 728}
+\newline
+
+    Ohjelma tuottaa tiedostot \textit{filtered.raw} ja \textit{transformed.raw}. Ohjelman tulosteesta näkee näiden dimensiot, joiden perusteella datan voi lukea esim. ImageJ ohjelmalla 32-bittisinä liukulukuina. Valmiita tuloksia löytyy repo-sitoryn kansiosta \textit{doc/valmiita\_tuloksia/} png-muotoon tallennettuina.
+    
+    \subsection{Testien ajaminen}
+    Varmista, että olet kääntänyt testit kohdan (\ref{testeineen}) mukaisesti. Olettaen, että olet kohdan (\ref{testeineen}) kuudennen askeleen osoittamassa \textit{tests}-kansiossa voit ajaa testit komennolla:
+\newline
+\newline
+    \texttt{./run\_tests}
+\newline
+
+\end{document}

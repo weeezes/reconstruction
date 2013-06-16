@@ -141,7 +141,7 @@ void algorithms::ifft2D(ComplexArray& data, unsigned int sideLength)
  * @param angleStop the last angle that describes the angle of the last row in the singoram
  * @param angleStep the step that describes how many degrees the original function has rotated when moving a step in the columns of the sinogram
  */
-Image algorithms::inverse_radon(Image input, int angleStart, int angleStop, int angleStep)
+Image algorithms::inverseRadonTransform(Image input, int angleStart, int angleStop, int angleStep)
 {
     // estimate output width
     int outputWidth = (int) (2*std::floor(input.getHeight()/(2*std::sqrt(2))));
